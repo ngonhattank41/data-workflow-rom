@@ -24,4 +24,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: data-workflow-rom
           directory: .
+          branch: master
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
