@@ -1,0 +1,1710 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="ROM kiến thức Data Workflow ngân hàng dành cho Oracle Database Developer">
+<title>Data Workflow ROM</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon-192.png">
+<style>
+:root{--bg:#f5f7fb;--surface:#fff;--surface2:#eef2f7;--text:#172033;--muted:#64748b;--line:#dbe3ef;--accent:#1d4ed8;--accent2:#0f766e;--code:#0f172a;--codeText:#e2e8f0;--shadow:0 10px 30px rgba(15,23,42,.08)}
+[data-theme="dark"]{--bg:#0b1120;--surface:#111827;--surface2:#1e293b;--text:#e5edf7;--muted:#9aa8bb;--line:#263449;--accent:#60a5fa;--accent2:#5eead4;--code:#020617;--codeText:#e2e8f0;--shadow:0 12px 34px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--accent)}button,input{font:inherit}.app{min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:10px max(14px,env(safe-area-inset-left));background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;min-width:max-content;font-weight:800}.brand-badge{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1d4ed8,#0f766e);color:white;font-size:13px}
+.search-wrap{position:relative;flex:1;max-width:720px;margin:auto}#search{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--text);outline:none}#search:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.search-results{display:none;position:absolute;top:48px;left:0;right:0;max-height:65vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:6px}.search-results.show{display:block}.search-result{display:block;padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--text)}.search-result:hover{background:var(--surface2)}.search-result small{display:block;color:var(--muted)}
+.icon-btn{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}
+.tabs{display:flex;gap:7px;overflow:auto;padding:10px max(14px,calc((100vw - 1440px)/2));background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:57px;z-index:40}.tab-btn{white-space:nowrap;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:999px;padding:7px 13px;cursor:pointer}.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.layout{display:grid;grid-template-columns:280px minmax(0,980px);gap:26px;max-width:1320px;margin:0 auto;padding:24px 18px 80px}.sidebar{position:sticky;top:118px;height:calc(100vh - 138px);overflow:auto;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px;box-shadow:var(--shadow)}.sidebar h3{margin:4px 7px 9px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.toc{display:none}.toc.active{display:block}.toc a{display:block;padding:7px 9px;border-radius:8px;text-decoration:none;color:var(--text);font-size:14px;line-height:1.35}.toc a:hover{background:var(--surface2);color:var(--accent)}
+main{min-width:0}.tab-panel{display:none}.tab-panel.active{display:block}.hero{padding:26px 28px;border-radius:20px;background:linear-gradient(135deg,#0f172a,#173b72 60%,#0f766e);color:white;box-shadow:var(--shadow);margin-bottom:20px}.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,46px);line-height:1.08}.hero p{margin:0;opacity:.86;max-width:820px}.hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.chip{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.13);font-size:13px}
+.chapter{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 25px;margin:0 0 18px;box-shadow:var(--shadow);overflow:hidden}.chapter.prelude:empty{display:none}h1,h2,h3{line-height:1.3;scroll-margin-top:130px}h1{font-size:2.05rem}h2{font-size:1.55rem;margin-top:0}h3{font-size:1.2rem;margin-top:1.5em}.heading-anchor{opacity:0;margin-left:8px;text-decoration:none;font-weight:400}h1:hover .heading-anchor,h2:hover .heading-anchor,h3:hover .heading-anchor{opacity:.55}blockquote{margin:1rem 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--surface2);border-radius:0 10px 10px 0}table{border-collapse:collapse;width:100%;display:block;overflow:auto}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--surface2)}code{font-family:"Cascadia Code",Consolas,monospace;font-size:.92em}:not(pre)>code{padding:2px 5px;border-radius:5px;background:var(--surface2);color:var(--accent2)}pre{position:relative;overflow:auto;padding:17px;border-radius:12px;background:var(--code);color:var(--codeText)}.copy-code{position:absolute;right:8px;top:8px;border:1px solid #475569;background:#1e293b;color:#e2e8f0;border-radius:7px;padding:4px 7px;font-size:12px;cursor:pointer}
+.diagram-card{margin:18px 0;padding:12px;background:var(--surface2);border:1px solid var(--line);border-radius:14px;text-align:center}.diagram-card img{display:block;width:100%;height:auto;max-height:760px;object-fit:contain;border-radius:10px;background:white}.diagram-card figcaption{color:var(--muted);font-size:14px;margin-top:9px}.diagram-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.gallery-item{margin:0}.notice{border-left:4px solid #f59e0b;background:color-mix(in srgb,#f59e0b 12%,var(--surface));padding:14px 16px;border-radius:10px;margin-bottom:18px}footer{color:var(--muted);text-align:center;padding:24px}
+mark{background:#fde68a;color:#111827;border-radius:3px;padding:0 2px}
+@media(max-width:900px){.layout{display:block;padding:14px 10px 65px}.sidebar{display:none}.tabs{top:57px;padding-left:10px}.chapter{padding:18px 16px;border-radius:13px}.diagram-grid{grid-template-columns:1fr}.brand span:last-child{display:none}.topbar{gap:8px}}
+@media print{.topbar,.tabs,.sidebar,.copy-code{display:none!important}.layout{display:block;max-width:none;padding:0}.chapter{box-shadow:none;break-inside:avoid;border-color:#bbb}.tab-panel{display:block!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="brand-badge">ROM</div><span>Data Workflow</span></div>
+  <div class="search-wrap"><input id="search" type="search" placeholder="Tìm bảng, khái niệm, sự cố, công thức…" autocomplete="off"><div id="searchResults" class="search-results"></div></div>
+  <button class="icon-btn" id="installBtn" hidden title="Cài ứng dụng">＋</button>
+  <button class="icon-btn" id="themeBtn" title="Đổi giao diện">◐</button>
+</header>
+<nav class="tabs" aria-label="Nội dung">
+  <button class="tab-btn active" data-tab="rom">ROM Master</button>
+  <button class="tab-btn" data-tab="recall">Active Recall</button>
+  <button class="tab-btn" data-tab="tables">Table Index</button>
+  <button class="tab-btn" data-tab="diagrams">Diagrams</button>
+  <button class="tab-btn" data-tab="about">Giới thiệu</button>
+</nav>
+<div class="layout">
+<aside class="sidebar"><h3>Mục lục</h3>
+  <div class="toc active" data-toc="rom"><a href="#rom-1-ban-o-toan-canh-trong-60-giay" data-target="rom-1-ban-o-toan-canh-trong-60-giay">1. Bản đồ toàn cảnh trong 60 giây</a><a href="#rom-2-thong-ke-va-lam-sach-tai-lieu-nguon" data-target="rom-2-thong-ke-va-lam-sach-tai-lieu-nguon">2. Thống kê và làm sạch tài liệu nguồn</a><a href="#rom-3-chin-nguyen-ly-xuyen-suot-phai-thuoc-long" data-target="rom-3-chin-nguyen-ly-xuyen-suot-phai-thuoc-long">3. Chín nguyên lý xuyên suốt phải thuộc lòng</a><a href="#rom-4-customer-kyc-aml" data-target="rom-4-customer-kyc-aml">4. Customer/KYC/AML</a><a href="#rom-5-vong-oi-mot-giao-dich-core" data-target="rom-5-vong-oi-mot-giao-dich-core">5. Vòng đời một giao dịch Core</a><a href="#rom-6-eod-accrual-ftp-netting" data-target="rom-6-eod-accrual-ftp-netting">6. EOD: Accrual, FTP, Netting</a><a href="#rom-7-deposit-business-data-model" data-target="rom-7-deposit-business-data-model">7. Deposit Business &amp; Data Model</a><a href="#rom-8-loan-lifecycle" data-target="rom-8-loan-lifecycle">8. Loan lifecycle</a><a href="#rom-9-collateral-architecture" data-target="rom-9-collateral-architecture">9. Collateral architecture</a><a href="#rom-10-fx-remittance" data-target="rom-10-fx-remittance">10. FX &amp; Remittance</a><a href="#rom-11-trade-finance" data-target="rom-11-trade-finance">11. Trade Finance</a><a href="#rom-12-treasury" data-target="rom-12-treasury">12. Treasury</a><a href="#rom-13-nostro-vostro-reconciliation" data-target="rom-13-nostro-vostro-reconciliation">13. Nostro/Vostro Reconciliation</a><a href="#rom-14-channel-architecture" data-target="rom-14-channel-architecture">14. Channel Architecture</a><a href="#rom-15-kien-truc-nhieu-tang" data-target="rom-15-kien-truc-nhieu-tang">15. Kiến trúc nhiều tầng</a><a href="#rom-16-cong-thuc-loi-nhuan-quan-tri" data-target="rom-16-cong-thuc-loi-nhuan-quan-tri">16. Công thức lợi nhuận quản trị</a><a href="#rom-17-risk-basics" data-target="rom-17-risk-basics">17. Risk Basics</a><a href="#rom-18-core-banking-infrastructure" data-target="rom-18-core-banking-infrastructure">18. Core Banking Infrastructure</a><a href="#rom-19-ma-tran-trieu-chung-uong-kiem-tra" data-target="rom-19-ma-tran-trieu-chung-uong-kiem-tra">19. Ma trận triệu chứng → đường kiểm tra</a><a href="#rom-20-bo-cau-hoi-phai-hoi-truoc-khi-sua-du-lieu" data-target="rom-20-bo-cau-hoi-phai-hoi-truoc-khi-sua-du-lieu">20. Bộ câu hỏi phải hỏi trước khi sửa dữ liệu</a><a href="#rom-21-kiem-tra-duplicate-theo-natural-key" data-target="rom-21-kiem-tra-duplicate-theo-natural-key">21. Kiểm tra duplicate theo natural key</a><a href="#rom-22-merge-idempotent" data-target="rom-22-merge-idempotent">22. MERGE idempotent</a><a href="#rom-23-pre-aggregate-truoc-join" data-target="rom-23-pre-aggregate-truoc-join">23. Pre-aggregate trước JOIN</a><a href="#rom-24-detect-orphan-record" data-target="rom-24-detect-orphan-record">24. Detect orphan record</a><a href="#rom-25-reconciliation-source-target" data-target="rom-25-reconciliation-source-target">25. Reconciliation source/target</a><a href="#rom-26-thu-tu-hoc-toi-uu" data-target="rom-26-thu-tu-hoc-toi-uu">26. Thứ tự học tối ưu</a><a href="#rom-27-phuong-phap-5-phut" data-target="rom-27-phuong-phap-5-phut">27. Phương pháp 5 phút</a><a href="#rom-28-moc-tri-nho" data-target="rom-28-moc-tri-nho">28. Móc trí nhớ</a><a href="#rom-29-ranh-gioi-giua-du-kien-va-suy-luan" data-target="rom-29-ranh-gioi-giua-du-kien-va-suy-luan">29. Ranh giới giữa dữ kiện và suy luận</a></div>
+  <div class="toc" data-toc="recall"><a href="#recall-a-66-flashcards" data-target="recall-a-66-flashcards">A. 66 Flashcards</a><a href="#recall-b-24-cau-hoi-hoc-bua-co-ap-an" data-target="recall-b-24-cau-hoi-hoc-bua-co-ap-an">B. 24 câu hỏi hóc búa có đáp án</a><a href="#recall-c-bai-tap-ve-lai-tu-tri-nho" data-target="recall-c-bai-tap-ve-lai-tu-tri-nho">C. Bài tập vẽ lại từ trí nhớ</a></div>
+  <div class="toc" data-toc="tables"></div>
+  <div class="toc" data-toc="diagrams"><a href="#diagram-gallery">Thư viện 8 sơ đồ</a></div>
+  <div class="toc" data-toc="about"><a href="#about-content">Cách sử dụng</a></div>
+</aside>
+<main>
+<section class="tab-panel active" data-panel="rom">
+  <div class="hero"><h1>Data Workflow ROM</h1><p>Sổ tay tra cứu nhanh luồng dữ liệu ngân hàng dành cho Oracle Database Developer: từ Channel, Core, Accounting/EOD đến Data Warehouse, PMS, Risk và Infrastructure.</p><div class="chips"><span class="chip">11 miền kiến thức</span><span class="chip">8 sơ đồ</span><span class="chip">66 flashcard</span><span class="chip">PWA & offline</span></div></div>
+  <div class="notice"><strong>Lưu ý bảo mật:</strong> Không xuất bản công khai nếu tài liệu chứa tên hệ thống, bảng dữ liệu hoặc quy trình nội bộ của ngân hàng. Nên đặt lớp đăng nhập bằng email/SSO.</div>
+  <section class="chapter prelude"><h1 id="rom-data-workflow-rom-kien-thuc-ngan-hang">DATA WORKFLOW — ROM KIẾN THỨC NGÂN HÀNG<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-data-workflow-rom-kien-thuc-ngan-hang">#</a></h1>
+<blockquote>
+<p><strong>Mục tiêu:</strong> giúp một Oracle Database Developer hiểu nhanh, truy vết đúng và vận hành an toàn luồng dữ liệu ngân hàng từ Channel → Core → Accounting/EOD → Data Warehouse → PMS/Risk/Reporting.</p>
+<p><strong>Phạm vi:</strong> nội dung được tái cấu trúc từ file <code>Data workflow.md</code>. Các con số, chu kỳ, tên hệ thống và quy tắc nghiệp vụ đặc thù phải được đối chiếu lại với tài liệu chính thức của ngân hàng trước khi áp dụng Production.</p>
+</blockquote>
+<hr/>
+</section><section class="chapter"><h2 id="rom-1-ban-o-toan-canh-trong-60-giay">1. Bản đồ toàn cảnh trong 60 giây<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-1-ban-o-toan-canh-trong-60-giay">#</a></h2>
+<p>Toàn bộ tài liệu có thể nén thành <strong>7 tầng dữ liệu</strong>:</p>
+<ol>
+<li><strong>Kênh giao dịch:</strong> ATM/POS, Mobile, CMS, Open API, SWIFT.</li>
+<li><strong>Kiểm soát trước giao dịch:</strong> KYC/AML, Watchlist, hạn mức, trạng thái tài khoản.</li>
+<li><strong>Core nghiệp vụ:</strong> Customer, Deposit, Loan, FX/Trade, Treasury.</li>
+<li><strong>Kế toán giao dịch:</strong> Master/History → Slip → Voucher → General Ledger.</li>
+<li><strong>Chốt sổ cuối ngày:</strong> Accrual, FTP, Netting, Reconciliation, EOD Batch.</li>
+<li><strong>Kho dữ liệu:</strong> Basic Mart → Integration Mart → Detailed Mart → KPI/Report Mart.</li>
+<li><strong>Quản trị:</strong> PMS/Profitability, Risk/Basel/ALM, báo cáo quản trị và pháp lý.</li>
+</ol>
+<h3 id="rom-luong-nho-duy-nhat">Luồng nhớ duy nhất<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-nho-duy-nhat">#</a></h3>
+<p><img alt="Luồng dữ liệu ngân hàng end-to-end" src="diagrams_fixed/01_end_to_end_data_workflow.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/01_end_to_end_data_workflow.png" rel="noopener" target="_blank"><img alt="Luồng dữ liệu ngân hàng end-to-end" loading="lazy" src="assets/diagrams/01_end_to_end_data_workflow.png"/></a><figcaption>Luồng dữ liệu ngân hàng end-to-end — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<p><strong>Câu thần chú:</strong></p>
+<blockquote>
+<p>Giao dịch phải có <strong>ID để truy vết</strong>, dữ liệu phải có <strong>grain rõ ràng</strong>, kế toán phải <strong>DR = CR</strong>, batch phải <strong>idempotent</strong>, mart phải <strong>đối soát</strong>, báo cáo phải <strong>không nhân bản dữ liệu</strong>.</p>
+</blockquote>
+<hr/>
+</section><section class="chapter"><h2 id="rom-2-thong-ke-va-lam-sach-tai-lieu-nguon">2. Thống kê và làm sạch tài liệu nguồn<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-2-thong-ke-va-lam-sach-tai-lieu-nguon">#</a></h2>
+<ul>
+<li>Tài liệu nguồn khoảng <strong>43.500 từ</strong>, <strong>2.617 dòng</strong>, hơn <strong>265 KB</strong>.</li>
+<li>Có <strong>37 khối ROM</strong>, trong đó:
+<ul>
+<li>2 khối là template/phương pháp học.</li>
+<li>2 cặp nội dung gần như trùng: AML và Accounting/Closing.</li>
+<li>2 cặp Deposit có nội dung chồng lấn nhưng bản sau chi tiết hơn.</li>
+</ul>
+</li>
+<li>Sau khi hợp nhất, kiến thức được tổ chức thành <strong>11 miền nghiệp vụ chính</strong> và <strong>9 nguyên lý xuyên suốt</strong>.</li>
+</ul>
+<h3 id="rom-11-mien-nghiep-vu">11 miền nghiệp vụ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-11-mien-nghiep-vu">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Miền</th>
+<th>Câu hỏi cốt lõi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Customer &amp; AML</td>
+<td>Khách hàng có được phép giao dịch không?</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Core Transaction &amp; Accounting</td>
+<td>Một giao dịch được ghi nhận và hạch toán thế nào?</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Deposit</td>
+<td>Tài khoản tiền gửi, số dư và lãi được quản lý ra sao?</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Loan &amp; Collateral</td>
+<td>Hạn mức, tài khoản vay, khế ước và tài sản bảo đảm liên kết thế nào?</td>
+</tr>
+<tr>
+<td>5</td>
+<td>FX, Remittance &amp; Trade Finance</td>
+<td>Tiền và điện quốc tế được định tuyến, kiểm soát thế nào?</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Treasury &amp; Reconciliation</td>
+<td>Ngân hàng quản lý vị thế, deal và Nostro/Vostro thế nào?</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Channel</td>
+<td>Giao dịch từ kênh đến Core và quay lại khách hàng thế nào?</td>
+</tr>
+<tr>
+<td>8</td>
+<td>MIS / Data Warehouse</td>
+<td>Dữ liệu OLTP được biến thành dữ liệu báo cáo thế nào?</td>
+</tr>
+<tr>
+<td>9</td>
+<td>PMS / Profitability</td>
+<td>Lãi thật của khách hàng, tài khoản, sản phẩm, chi nhánh là bao nhiêu?</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Risk Management</td>
+<td>EAD, PD, LGD, RWA, ALM được hình thành từ dữ liệu nào?</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Infrastructure</td>
+<td>Hệ thống đạt HA, bảo mật và DR thế nào?</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+</section><section class="chapter"><h2 id="rom-3-chin-nguyen-ly-xuyen-suot-phai-thuoc-long">3. Chín nguyên lý xuyên suốt phải thuộc lòng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-chin-nguyen-ly-xuyen-suot-phai-thuoc-long">#</a></h2>
+<h3 id="rom-3-1-mot-giao-dich-mot-soi-chi-truy-vet">3.1 Một giao dịch — một sợi chỉ truy vết<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-1-mot-giao-dich-mot-soi-chi-truy-vet">#</a></h3>
+<ul>
+<li>Giao dịch xuyên module cần một <strong>Global ID / Glob_id</strong>.</li>
+<li>ID này phải xuất hiện hoặc ánh xạ được qua Channel log, business history, Slip, Voucher và GL.</li>
+<li>Khi xử lý incident, không bắt đầu bằng “bảng nào có dữ liệu”; hãy bắt đầu bằng <strong>ID nào nối được toàn bộ vòng đời</strong>.</li>
+</ul>
+<h3 id="rom-3-2-master-la-trang-thai-history-la-su-kien">3.2 Master là trạng thái, History là sự kiện<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-2-master-la-trang-thai-history-la-su-kien">#</a></h3>
+<ul>
+<li><code>*_mas</code>: trạng thái hiện tại, thường UPDATE.</li>
+<li><code>*_his</code> / <code>*_trx</code>: lịch sử, thường INSERT append-only.</li>
+<li>Master tối ưu đọc trạng thái hiện tại; History phục vụ audit, movement, time series.</li>
+<li>Không dùng Master hiện tại để trả lời câu hỏi lịch sử nếu có thay đổi thuộc tính theo thời gian.</li>
+</ul>
+<h3 id="rom-3-3-grain-truoc-join-sau">3.3 Grain trước, JOIN sau<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-3-grain-truoc-join-sau">#</a></h3>
+<p>Trước khi JOIN, phải trả lời: <strong>mỗi dòng đại diện cho cái gì?</strong></p>
+<ul>
+<li>Customer: 1 dòng/khách hàng.</li>
+<li>Account: 1 dòng/tài khoản.</li>
+<li>Execution: 1 dòng/khế ước.</li>
+<li>Transaction: 1 dòng/giao dịch.</li>
+<li>Snapshot: 1 dòng/thực thể/ngày.</li>
+</ul>
+<p>Nếu JOIN bảng 1:N rồi SUM thuộc tính phía “1”, số liệu sẽ bị nhân bản. Hãy aggregate phía N về đúng grain trước.</p>
+<h3 id="rom-3-4-ke-toan-phai-can-bang">3.4 Kế toán phải cân bằng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-4-ke-toan-phai-can-bang">#</a></h3>
+<ul>
+<li>Slip mô tả chứng từ/sự kiện.</li>
+<li>Voucher mô tả bút toán Nợ/Có.</li>
+<li>Tổng DR phải bằng tổng CR.</li>
+<li>Inter-office/FTP toàn ngân hàng phải net về 0 theo quy tắc của hệ thống.</li>
+</ul>
+<h3 id="rom-3-5-batch-phai-idempotent">3.5 Batch phải idempotent<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-5-batch-phai-idempotent">#</a></h3>
+<p>Rerun cùng <code>business_date + entity_key + process_type</code> không được tạo thêm số liệu.</p>
+<ul>
+<li>Có khóa tự nhiên hoặc unique constraint chống trùng.</li>
+<li>Có trạng thái RUNNING/SUCCESS/FAILED.</li>
+<li>Có checkpoint và reconciliation trước khi publish.</li>
+<li>Không DELETE/INSERT mù nếu chưa khóa phạm vi dữ liệu.</li>
+</ul>
+<h3 id="rom-3-6-thoi-gian-la-mot-phan-cua-khoa-logic">3.6 Thời gian là một phần của khóa logic<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-6-thoi-gian-la-mot-phan-cua-khoa-logic">#</a></h3>
+<ul>
+<li>MIS thường là T+1/T-1, không phải real-time.</li>
+<li>SCD/History phải JOIN theo <code>valid_from &lt;= trx_date &lt; valid_to</code>.</li>
+<li>Accrual phụ thuộc business date, holiday calendar, day count convention.</li>
+<li>Cut-off và timezone phải được đưa vào thiết kế, không để ngầm định.</li>
+</ul>
+<h3 id="rom-3-7-trang-thai-la-cong-kiem-soat">3.7 Trạng thái là cổng kiểm soát<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-7-trang-thai-la-cong-kiem-soat">#</a></h3>
+<p>Trước giao dịch cần kiểm tra tối thiểu:</p>
+<ul>
+<li>Customer/AML status.</li>
+<li>Account status: normal, dormant, blocked/accident, released.</li>
+<li>Limit/available balance.</li>
+<li>Product and channel eligibility.</li>
+<li>Approval/EDD nếu thuộc trường hợp bắt buộc.</li>
+</ul>
+<h3 id="rom-3-8-reconciliation-la-ieu-kien-hoan-tat">3.8 Reconciliation là điều kiện hoàn tất<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-8-reconciliation-la-ieu-kien-hoan-tat">#</a></h3>
+<p>Một luồng chưa hoàn thành chỉ vì job “SUCCESS”. Nó chỉ hoàn thành khi:</p>
+<ul>
+<li>Count khớp.</li>
+<li>Amount khớp.</li>
+<li>DR/CR khớp.</li>
+<li>Source/target khớp theo tolerance.</li>
+<li>Không có record mồ côi hoặc unmatched ngoài ngưỡng.</li>
+</ul>
+<h3 id="rom-3-9-dependency-quan-trong-hon-thoi-gian-chay">3.9 Dependency quan trọng hơn thời gian chạy<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-3-9-dependency-quan-trong-hon-thoi-gian-chay">#</a></h3>
+<p>Job đích không được chạy vì “đến giờ”; chỉ chạy khi các predecessor đã SUCCESS và reconciliation đạt yêu cầu. Đây là điểm sống còn của EOD, PMS và Risk.</p>
+<hr/>
+<h1 id="rom-phan-a-customer-aml">PHẦN A — CUSTOMER &amp; AML<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-a-customer-aml">#</a></h1>
+</section><section class="chapter"><h2 id="rom-4-customer-kyc-aml">4. Customer/KYC/AML<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-4-customer-kyc-aml">#</a></h2>
+<h3 id="rom-muc-ich">Mục đích<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-muc-ich">#</a></h3>
+<p>Xác định đúng khách hàng, đo rủi ro, ngăn giao dịch bị cấm và tạo dữ liệu phục vụ CTR/STR.</p>
+<h3 id="rom-luong-nghiep-vu-nen">Luồng nghiệp vụ nén<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-nghiep-vu-nen">#</a></h3>
+<p><img alt="Luồng KYC, AML và báo cáo tuân thủ" src="diagrams_fixed/02_aml_kyc_flow.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/02_aml_kyc_flow.png" rel="noopener" target="_blank"><img alt="Luồng KYC và AML" loading="lazy" src="assets/diagrams/02_aml_kyc_flow.png"/></a><figcaption>Luồng KYC và AML — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<h3 id="rom-khoa-va-du-lieu-trong-tam">Khóa và dữ liệu trọng tâm<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-khoa-va-du-lieu-trong-tam">#</a></h3>
+<ul>
+<li>Khóa tích hợp khách hàng theo tài liệu: <code>sh + lcl + corp_c + cusno</code>.</li>
+<li>Dữ liệu tĩnh: danh tính, địa chỉ, nghề nghiệp, quốc tịch, ownership.</li>
+<li>Dữ liệu động: risk score, watchlist result, CDD/EDD status, alert/case.</li>
+<li><code>Customer Change Info</code> phải kích hoạt đánh giá lại khi thuộc tính rủi ro thay đổi.</li>
+</ul>
+<h3 id="rom-80-20-phai-nho">80/20 phải nhớ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-80-20-phai-nho">#</a></h3>
+<ol>
+<li>Watchlist phải diễn ra trước khi hoàn tất giao dịch có kiểm soát.</li>
+<li>Risk score không phải dữ liệu “tính một lần”; phải tái đánh giá theo chu kỳ/chuyển biến.</li>
+<li>Customer master và AML data phải cùng một integration key.</li>
+<li>TMS tạo alert, con người/case workflow quyết định STR; alert không đồng nghĩa với vi phạm.</li>
+<li>Giá trị chu kỳ 1Y/2Y/3Y, ngưỡng ownership 25% và nhóm bắt buộc EDD trong tài liệu là <strong>quy tắc nguồn</strong>, cần đối chiếu policy hiện hành trước Production.</li>
+</ol>
+<h3 id="rom-iem-rui-ro-van-hanh">Điểm rủi ro vận hành<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-iem-rui-ro-van-hanh">#</a></h3>
+<ul>
+<li><strong>False negative:</strong> bỏ sót người bị cấm do sai chính tả, transliteration hoặc dữ liệu thiếu.</li>
+<li><strong>False positive:</strong> chặn nhầm do trùng tên, khiến case backlog tăng mạnh.</li>
+<li><strong>Stale risk:</strong> change data đến chậm nên risk score không còn đúng.</li>
+<li><strong>Broken identity:</strong> nhiều mã khách hàng cho cùng một người hoặc một mã map sang nhiều người.</li>
+</ul>
+<h3 id="rom-truy-vet-nhanh">Truy vết nhanh<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-truy-vet-nhanh">#</a></h3>
+<ol>
+<li>Kiểm tra customer integration key.</li>
+<li>Kiểm tra dữ liệu nguồn và thời điểm cập nhật.</li>
+<li>Kiểm tra phiên bản danh sách watchlist.</li>
+<li>Kiểm tra score/rule version.</li>
+<li>Kiểm tra approval/case status và audit log.</li>
+</ol>
+<hr/>
+<h1 id="rom-phan-b-core-transaction-accounting-eod">PHẦN B — CORE TRANSACTION, ACCOUNTING &amp; EOD<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-b-core-transaction-accounting-eod">#</a></h1>
+</section><section class="chapter"><h2 id="rom-5-vong-oi-mot-giao-dich-core">5. Vòng đời một giao dịch Core<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-5-vong-oi-mot-giao-dich-core">#</a></h2>
+<h3 id="rom-luong-chuan">Luồng chuẩn<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-chuan">#</a></h3>
+<p><img alt="Từ giao dịch Core đến sổ cái" src="diagrams_fixed/03_core_transaction_accounting.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/03_core_transaction_accounting.png" rel="noopener" target="_blank"><img alt="Core transaction đến accounting" loading="lazy" src="assets/diagrams/03_core_transaction_accounting.png"/></a><figcaption>Core transaction đến accounting — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<h3 id="rom-y-nghia-tung-lop">Ý nghĩa từng lớp<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-y-nghia-tung-lop">#</a></h3>
+<ul>
+<li><strong>Business transaction:</strong> cập nhật tài khoản nghiệp vụ và history trong phạm vi ACID phù hợp.</li>
+<li><strong>Slip:</strong> chứng từ gốc mô tả sự kiện giao dịch.</li>
+<li><strong>Voucher:</strong> bút toán kế toán được sinh từ Slip.</li>
+<li><strong>GL:</strong> số dư tổng hợp theo ngày, chi nhánh, COA, currency.</li>
+</ul>
+<h3 id="rom-cac-bang-uoc-nhac-nhieu-trong-tai-lieu">Các bảng được nhắc nhiều trong tài liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cac-bang-uoc-nhac-nhieu-trong-tai-lieu">#</a></h3>
+<ul>
+<li>Slip: <code>gdw_gac_slip_his</code>, <code>gac_slip_mas</code>, <code>gdc_slip_his</code>.</li>
+<li>Voucher: <code>gdw_gac_vouic_his</code>.</li>
+<li>GL: <code>gdw_gac_bspllc_mas</code>, <code>gdw_com_bsplic_inf</code>, <code>gac_bspllc_mas</code>.</li>
+<li>Mapping COA: <code>gdw_gac_acccdedic_mas</code>.</li>
+</ul>
+<h3 id="rom-composite-key-quan-trong-cua-gl">Composite key quan trọng của GL<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-composite-key-quan-trong-cua-gl">#</a></h3>
+<p><code>standard_date + management_branch + COA + currency</code></p>
+<p>Có thể còn chiều khác tùy thiết kế, nhưng bốn chiều này là trục aggregate cốt lõi trong tài liệu.</p>
+<h3 id="rom-incident-kinh-ien-app-bao-thanh-cong-nhung-gl-thieu">Incident kinh điển: App báo thành công nhưng GL thiếu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-incident-kinh-ien-app-bao-thanh-cong-nhung-gl-thieu">#</a></h3>
+<p>Theo <code>Glob_id</code>, kiểm tra tuần tự:</p>
+<ol>
+<li>Channel log có request/response không?</li>
+<li>Master đã UPDATE chưa?</li>
+<li>History đã INSERT chưa?</li>
+<li>Slip đã sinh chưa?</li>
+<li>Background process đã consume Slip chưa?</li>
+<li>Voucher có đủ DR/CR không?</li>
+<li>Local GL đã post chưa?</li>
+<li>HQ GL đã nhận chưa?</li>
+</ol>
+<p>Không sửa GL trực tiếp trước khi xác định đúng điểm gãy.</p>
+</section><section class="chapter"><h2 id="rom-6-eod-accrual-ftp-netting">6. EOD: Accrual, FTP, Netting<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-6-eod-accrual-ftp-netting">#</a></h2>
+<h3 id="rom-luong-nen">Luồng nén<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-nen">#</a></h3>
+<p><img alt="Luồng EOD: Accrual, FTP và Netting" src="diagrams_fixed/04_eod_accrual_ftp.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/04_eod_accrual_ftp.png" rel="noopener" target="_blank"><img alt="EOD Accrual và FTP" loading="lazy" src="assets/diagrams/04_eod_accrual_ftp.png"/></a><figcaption>EOD Accrual và FTP — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<h3 id="rom-cong-thuc-inh-luat-can-nho">Công thức/định luật cần nhớ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cong-thuc-inh-luat-can-nho">#</a></h3>
+<ul>
+<li>FTP theo tài liệu: <code>average balance × FTP rate × day/365</code>.</li>
+<li>Tiền tệ dùng <code>NUMBER/DECIMAL</code>, không dùng FLOAT.</li>
+<li><code>SUM</code> phải xử lý NULL bằng <code>NVL/COALESCE</code>.</li>
+<li>Netting giúp giảm hàng triệu update xuống vài nghìn posting tổng hợp.</li>
+<li>Tổng Inter-office phải cân bằng theo invariant của hệ thống.</li>
+</ul>
+<h3 id="rom-rui-ro-chinh">Rủi ro chính<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro-chinh">#</a></h3>
+<ul>
+<li>EOD chạy cùng giao dịch realtime gây row lock/contention.</li>
+<li>Holiday/leap year/day-count sai làm sai accrual.</li>
+<li>Bảng history không partition khiến full scan kéo dài.</li>
+<li>Rerun không idempotent làm nhân đôi accrual/FTP.</li>
+<li>Job post GL chạy trước job tính detail hoàn tất.</li>
+</ul>
+<h3 id="rom-mau-kiem-tra-can-oi-oracle">Mẫu kiểm tra cân đối Oracle<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-mau-kiem-tra-can-oi-oracle">#</a></h3>
+<pre><code class="language-sql">select business_date,
+       sum(nvl(dr_amount, 0)) total_dr,
+       sum(nvl(cr_amount, 0)) total_cr,
+       sum(nvl(dr_amount, 0)) - sum(nvl(cr_amount, 0)) diff
+from   daily_voucher
+where  business_date = :p_business_date
+group  by business_date
+having abs(sum(nvl(dr_amount, 0)) - sum(nvl(cr_amount, 0))) &gt; :p_tolerance;
+</code></pre>
+<hr/>
+<h1 id="rom-phan-c-deposit">PHẦN C — DEPOSIT<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-c-deposit">#</a></h1>
+</section><section class="chapter"><h2 id="rom-7-deposit-business-data-model">7. Deposit Business &amp; Data Model<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-7-deposit-business-data-model">#</a></h2>
+<h3 id="rom-vong-oi-tai-khoan">Vòng đời tài khoản<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-vong-oi-tai-khoan">#</a></h3>
+<ol>
+<li>Chọn sản phẩm: Demand / Time / Installment.</li>
+<li>Mở tài khoản và sinh ID.</li>
+<li>Giao dịch nộp/rút/chuyển.</li>
+<li>Tính lãi dồn tích hàng ngày.</li>
+<li>Settlement/renewal/maturity.</li>
+<li>Thay đổi trạng thái: normal, dormant, accident/blocked, released.</li>
+</ol>
+<h3 id="rom-hai-so-tai-khoan-phai-phan-biet">Hai số tài khoản phải phân biệt<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-hai-so-tai-khoan-phai-phan-biet">#</a></h3>
+<ul>
+<li><strong>DEP_ACNO:</strong> surrogate key hệ thống, ổn định, dùng liên kết bảng.</li>
+<li><strong>LCL_ACNO:</strong> số hiển thị cho khách hàng, có thể thay đổi/mapping.</li>
+</ul>
+<p>Đây là thiết kế giúp đổi số hiển thị mà không cập nhật hàng triệu dòng history.</p>
+<h3 id="rom-cau-truc-bang-loi">Cấu trúc bảng lõi<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cau-truc-bang-loi">#</a></h3>
+<ul>
+<li><code>gdc_ac_mas</code>: account master chung.</li>
+<li><code>gtd_td_mas</code>: term deposit sub-master.</li>
+<li><code>gdd_lq_mas</code>: demand/liquidity related master theo tài liệu.</li>
+<li><code>gdc_trx_his</code>: transaction history.</li>
+<li><code>gdc_int_mas</code>: interest master.</li>
+<li><code>gdc_intcal_his</code>: interest calculation history.</li>
+<li><code>gdc_maschgdt_his</code>: audit thay đổi master.</li>
+<li><code>gdc_rlytrx_his</code>: linked transaction history.</li>
+<li>Nhóm <code>gso_*</code>: auto transfer/rollover/day-future transaction.</li>
+</ul>
+<h3 id="rom-cong-thuc-so-du-trong-tai-lieu">Công thức số dư trong tài liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cong-thuc-so-du-trong-tai-lieu">#</a></h3>
+<p><code>DEP AC BLC = PABL BLC + PMT RSTRT AMT</code></p>
+<p>Hiểu theo nghiệp vụ:</p>
+<ul>
+<li>Ledger/account balance = available/payable balance + restricted/held amount.</li>
+<li>Khi cho phép rút tiền, ưu tiên kiểm tra <strong>available/payable balance</strong>, không chỉ ledger balance.</li>
+</ul>
+<h3 id="rom-quy-tac-pk-history">Quy tắc PK History<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-quy-tac-pk-history">#</a></h3>
+<p><code>DEP_ACNO + DEP_TRX_HIS_NO</code> hoặc <code>DEP_ACNO + *_SER_NO</code>.</p>
+<p>Serial phải duy nhất trong phạm vi tài khoản; sequence generation phải chịu được concurrency.</p>
+<h3 id="rom-rui-ro-van-hanh">Rủi ro vận hành<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro-van-hanh">#</a></h3>
+<ul>
+<li>Kênh mới quên kiểm tra dormant/blocked status.</li>
+<li><code>gdc_trx_his</code> phình nhanh, không partition/pruning.</li>
+<li>Tài khoản thu hộ có hotspot row lock trên master balance.</li>
+<li>Accrual/renewal dùng sai rate version hoặc business date.</li>
+<li>Mid-term release tính sai lãi không kỳ hạn.</li>
+</ul>
+<h3 id="rom-truy-vet-lai-sai">Truy vết lãi sai<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-truy-vet-lai-sai">#</a></h3>
+<ol>
+<li>Xác định <code>DEP_ACNO</code>, product, term, status.</li>
+<li>Kiểm tra rate history/effective date.</li>
+<li>Kiểm tra daily balance và cut-off.</li>
+<li>Kiểm tra <code>gdc_intcal_his</code> từng ngày.</li>
+<li>Kiểm tra settlement/rollover job và rerun.</li>
+<li>Đối chiếu GL interest posting.</li>
+</ol>
+<hr/>
+<h1 id="rom-phan-d-loan-collateral">PHẦN D — LOAN &amp; COLLATERAL<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-d-loan-collateral">#</a></h1>
+</section><section class="chapter"><h2 id="rom-8-loan-lifecycle">8. Loan lifecycle<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-8-loan-lifecycle">#</a></h2>
+<h3 id="rom-cay-tin-dung-ba-cap">Cây tín dụng ba cấp<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cay-tin-dung-ba-cap">#</a></h3>
+<p><img alt="Chuỗi khóa nghiệp vụ khoản vay" src="diagrams_fixed/05_loan_key_chain.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/05_loan_key_chain.png" rel="noopener" target="_blank"><img alt="Chuỗi khóa dữ liệu Loan" loading="lazy" src="assets/diagrams/05_loan_key_chain.png"/></a><figcaption>Chuỗi khóa dữ liệu Loan — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<p><strong>Chuỗi khóa quan trọng:</strong></p>
+<p><code>brw_aplct_no → lon_imt_no → lon_acno → exe_no</code></p>
+<p>Một hạn mức có nhiều tài khoản; một tài khoản có nhiều lần giải ngân; một lần giải ngân có nhiều kỳ trả nợ.</p>
+<h3 id="rom-luong-nghiep-vu">Luồng nghiệp vụ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-nghiep-vu">#</a></h3>
+<ol>
+<li>Consultation/Application.</li>
+<li>Credit appraisal &amp; approval.</li>
+<li>Create credit line.</li>
+<li>Create loan account.</li>
+<li>Disbursement/Execution.</li>
+<li>Generate schedule.</li>
+<li>Daily accrual and repayment.</li>
+<li>Past-due/Early warning/Charge-off.</li>
+</ol>
+<h3 id="rom-bang-trong-tam-theo-tai-lieu">Bảng trọng tâm theo tài liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-bang-trong-tam-theo-tai-lieu">#</a></h3>
+<ul>
+<li>Application/approval: <code>glm_cnsl_mas</code>, <code>glm_aplct_mas</code>, <code>glm_aprv_mas</code>.</li>
+<li>Credit line/account: <code>gle_lmt_mas</code>, <code>gle_acct_mas</code>.</li>
+<li>Disbursement: <code>gle_dsbs_mas</code>, <code>gle_dsbstrx_his</code>.</li>
+<li>Schedule/overdue: <code>gle_schd_mas</code>, <code>gle_schdpst_his</code>.</li>
+<li>Appraisal/collateral: <code>gla_aprs_mas</code>, <code>gla_estt_mas</code>, <code>gla_estbllon_inf</code>, <code>gla_coltr_inf</code>.</li>
+</ul>
+<h3 id="rom-repayment-patterns">Repayment patterns<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-repayment-patterns">#</a></h3>
+<ul>
+<li>Maturity/bullet: gốc cuối kỳ.</li>
+<li>Fixed principal: gốc đều, lãi giảm.</li>
+<li>Annuity: tổng gốc+lãi tương đối cố định.</li>
+</ul>
+<p>Schedule là nguồn sự thật để xác định due/past due; không suy luận nợ quá hạn chỉ từ current balance.</p>
+</section><section class="chapter"><h2 id="rom-9-collateral-architecture">9. Collateral architecture<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-9-collateral-architecture">#</a></h2>
+<p>Tài sản bảo đảm nên là module tách biệt vì:</p>
+<ul>
+<li>Một collateral có thể bảo đảm nhiều facility/execution.</li>
+<li>Một loan có thể dùng nhiều collateral.</li>
+<li>Từng loại tài sản có thuộc tính riêng: real estate, vehicle, deposit, securities.</li>
+<li>Cần appraisal version, haircut, eligible value và allocation ratio.</li>
+</ul>
+<h3 id="rom-kiem-soat-quan-trong">Kiểm soát quan trọng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-kiem-soat-quan-trong">#</a></h3>
+<ul>
+<li>Tổng allocated collateral value không vượt eligible value.</li>
+<li>Không dùng appraisal hết hạn.</li>
+<li>Release collateral chỉ khi nghĩa vụ liên quan đã được giải phóng.</li>
+<li>Collateral-to-loan link phải có hiệu lực theo thời gian.</li>
+</ul>
+<h3 id="rom-incident-no-qua-han-khong-xuat-hien">Incident nợ quá hạn không xuất hiện<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-incident-no-qua-han-khong-xuat-hien">#</a></h3>
+<ol>
+<li>Kiểm tra <code>gle_schd_mas</code> có due item chưa.</li>
+<li>Kiểm tra repayment/autodebit thực tế.</li>
+<li>Kiểm tra business date/holiday treatment.</li>
+<li>Kiểm tra job tạo <code>gle_schdpst_his</code>.</li>
+<li>Kiểm tra account/execution status.</li>
+<li>Kiểm tra ETL sang CIC/Risk có lấy đúng base date không.</li>
+</ol>
+<hr/>
+<h1 id="rom-phan-e-fx-remittance-trade-finance">PHẦN E — FX, REMITTANCE &amp; TRADE FINANCE<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-e-fx-remittance-trade-finance">#</a></h1>
+</section><section class="chapter"><h2 id="rom-10-fx-remittance">10. FX &amp; Remittance<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-10-fx-remittance">#</a></h2>
+<h3 id="rom-luong-outward">Luồng Outward<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-outward">#</a></h3>
+<p>Applicant → Remitting Bank → Settle/Correspondent Bank → Paying Bank → Beneficiary.</p>
+<h3 id="rom-luong-ien">Luồng điện<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-ien">#</a></h3>
+<p>Core → message generation → sanctions/watchlist → approval nếu caught → BIC/routing validation → SWIFT Alliance → receiving bank.</p>
+<h3 id="rom-iem-nho">Điểm nhớ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-iem-nho">#</a></h3>
+<ul>
+<li>Buying/Selling luôn nhìn từ góc độ ngân hàng.</li>
+<li>Settle Bank/Nostro là cầu thanh toán khi hai ngân hàng không có quan hệ trực tiếp.</li>
+<li>BIC/SWIFT code là routing key.</li>
+<li>MT103 thường gắn customer transfer; MT202 thường gắn bank-to-bank settlement theo ngữ cảnh nguồn.</li>
+<li>Mỗi message cần unique reference và idempotency để retry không gửi hai lần.</li>
+</ul>
+<h3 id="rom-bang-uoc-nhac">Bảng được nhắc<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-bang-uoc-nhac">#</a></h3>
+<ul>
+<li>Outgoing remittance: <code>gre_outgoing_mas</code>.</li>
+<li>Incoming message/remittance: <code>gsm_incoming_mas</code>.</li>
+<li>Nhóm <code>gre_mas</code>, <code>gre_amd</code>, <code>gre_stmt_inf</code> phục vụ remittance/trade message theo tài liệu.</li>
+</ul>
+<h3 id="rom-rui-ro">Rủi ro<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro">#</a></h3>
+<ul>
+<li>Safe Watch/AML false positive làm điện stuck.</li>
+<li>Tỷ giá stale gây arbitrage/loss.</li>
+<li>Sai BIC/account làm tiền treo.</li>
+<li>Timeout nhưng message đã gửi gây duplicate transfer khi retry.</li>
+</ul>
+</section><section class="chapter"><h2 id="rom-11-trade-finance">11. Trade Finance<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-11-trade-finance">#</a></h2>
+<h3 id="rom-vong-oi-l-c-nen">Vòng đời L/C nén<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-vong-oi-l-c-nen">#</a></h3>
+<p>Application → Issuance → SWIFT MT7xx → Amendment → Shipment/Documents → Document checking → Acceptance/Payment → Closure.</p>
+<h3 id="rom-phuong-thuc-thanh-toan">Phương thức thanh toán<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phuong-thuc-thanh-toan">#</a></h3>
+<ul>
+<li>T/T: chuyển tiền điện.</li>
+<li>D/P: documents against payment.</li>
+<li>D/A: documents against acceptance.</li>
+<li>L/C: ngân hàng cam kết thanh toán theo điều kiện chứng từ.</li>
+</ul>
+<h3 id="rom-kiem-soat-du-lieu">Kiểm soát dữ liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-kiem-soat-du-lieu">#</a></h3>
+<ul>
+<li>Version hóa amendment; không overwrite điều khoản cũ.</li>
+<li>Liên kết message reference với L/C reference và transaction reference.</li>
+<li>Theo dõi outstanding amount, utilization, commission và contingent liability.</li>
+<li>Sanctions screening phải áp dụng cho parties, banks, vessels/ports/goods khi policy yêu cầu.</li>
+</ul>
+<hr/>
+<h1 id="rom-phan-f-treasury-reconciliation">PHẦN F — TREASURY &amp; RECONCILIATION<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-f-treasury-reconciliation">#</a></h1>
+</section><section class="chapter"><h2 id="rom-12-treasury">12. Treasury<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-12-treasury">#</a></h2>
+<h3 id="rom-pham-vi">Phạm vi<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-pham-vi">#</a></h3>
+<ul>
+<li>Money Market.</li>
+<li>FX spot/forward/swap.</li>
+<li>Securities.</li>
+<li>Derivatives.</li>
+<li>Position, settlement, valuation, accounting.</li>
+</ul>
+<h3 id="rom-luong-deal">Luồng deal<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-deal">#</a></h3>
+<p>Trade capture → confirmation → settlement instruction → cash/securities settlement → position update → valuation/M2M → accounting → reconciliation.</p>
+<h3 id="rom-rui-ro-cot-loi">Rủi ro cốt lõi<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro-cot-loi">#</a></h3>
+<ul>
+<li>Market price/feed sai làm P&amp;L/M2M sai.</li>
+<li>Deal amendment không version hóa.</li>
+<li>Settlement date/currency mismatch.</li>
+<li>Position không khớp giữa front office, back office và GL.</li>
+</ul>
+</section><section class="chapter"><h2 id="rom-13-nostro-vostro-reconciliation">13. Nostro/Vostro Reconciliation<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-13-nostro-vostro-reconciliation">#</a></h2>
+<h3 id="rom-hai-tap-du-lieu">Hai tập dữ liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-hai-tap-du-lieu">#</a></h3>
+<ul>
+<li><strong>Shadow/Expected:</strong> hệ thống dự kiến ngân hàng đại lý sẽ ghi nhận.</li>
+<li><strong>Actual:</strong> sao kê/thông tin thực tế từ ngân hàng đại lý.</li>
+</ul>
+<h3 id="rom-luong-matching">Luồng matching<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-matching">#</a></h3>
+<p><img alt="Luồng đối soát và xử lý chênh lệch" src="diagrams_fixed/06_reconciliation_flow.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/06_reconciliation_flow.png" rel="noopener" target="_blank"><img alt="Luồng reconciliation" loading="lazy" src="assets/diagrams/06_reconciliation_flow.png"/></a><figcaption>Luồng reconciliation — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<h3 id="rom-matching-key-thuong-dung">Matching key thường dùng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-matching-key-thuong-dung">#</a></h3>
+<p>Value date, currency, amount, reference, counterparty, direction. Không nên match chỉ bằng amount.</p>
+<h3 id="rom-bang-trong-tam-theo-tai-lieu-2">Bảng trọng tâm theo tài liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-bang-trong-tam-theo-tai-lieu-2">#</a></h3>
+<ul>
+<li><code>grc_shdw</code>: shadow.</li>
+<li><code>grc_actl</code>: actual.</li>
+<li><code>gsc_pst_inf</code>, <code>gmm_pst_inf</code>: position/posting information theo module nguồn.</li>
+</ul>
+<h3 id="rom-kpi-van-hanh">KPI vận hành<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-kpi-van-hanh">#</a></h3>
+<ul>
+<li>Unmatched count/amount.</li>
+<li>Aging của exception.</li>
+<li>Duplicate statement line.</li>
+<li>Auto-match rate.</li>
+<li>Adjustment count sau cut-off.</li>
+</ul>
+<hr/>
+<h1 id="rom-phan-g-channel">PHẦN G — CHANNEL<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-g-channel">#</a></h1>
+</section><section class="chapter"><h2 id="rom-14-channel-architecture">14. Channel Architecture<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-14-channel-architecture">#</a></h2>
+<h3 id="rom-luong-tong-quat">Luồng tổng quát<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-tong-quat">#</a></h3>
+<p>Client/ATM/POS/API → Gateway/Switch → Channel service → Core/Tmax → External network nếu có → response → UMS notification.</p>
+<h3 id="rom-mien-du-lieu">Miền dữ liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-mien-du-lieu">#</a></h3>
+<ul>
+<li>ATM/POS transaction log.</li>
+<li>Domestic transfer/Clearing/RTGS.</li>
+<li>CMS/CFM/Bill payment.</li>
+<li>UMS SMS/email/push queue.</li>
+<li>Open API authentication, request/response, callback.</li>
+</ul>
+<h3 id="rom-bang-khoa-uoc-nhac">Bảng/khóa được nhắc<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-bang-khoa-uoc-nhac">#</a></h3>
+<ul>
+<li>ATM logs: <code>gat_trx_log</code>, <code>gat_obktrx_log</code>.</li>
+<li>UMS: <code>gms_dspch_mas</code>, <code>gms_umscust_mas</code>, <code>gms_dispch_tgt</code>.</li>
+<li>Batch/file: <code>gso_batfile_mas</code>.</li>
+<li>Bill payment/CFM: <code>gif_billpmnt_trx_log</code>, nhóm <code>gif_cfm_*</code>.</li>
+<li>ATM trace key: <code>atm_trx_trace_no</code>.</li>
+</ul>
+<h3 id="rom-ba-trang-thai-timeout-phai-phan-biet">Ba trạng thái timeout phải phân biệt<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-ba-trang-thai-timeout-phai-phan-biet">#</a></h3>
+<ol>
+<li>Request chưa đến Core.</li>
+<li>Core xử lý fail/rollback.</li>
+<li>Core commit thành công nhưng response mất trên đường về.</li>
+</ol>
+<p>Trường hợp 3 là nguyên nhân điển hình của duplicate retry. Vì vậy mỗi request phải có idempotency key và cơ chế query status.</p>
+<h3 id="rom-notification-khong-phai-giao-dich">Notification không phải giao dịch<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-notification-khong-phai-giao-dich">#</a></h3>
+<p>SMS/email fail không đồng nghĩa giao dịch fail. UMS là luồng bất đồng bộ; cần tách transaction status và notification status.</p>
+<hr/>
+<h1 id="rom-phan-h-mis-data-warehouse">PHẦN H — MIS / DATA WAREHOUSE<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-h-mis-data-warehouse">#</a></h1>
+</section><section class="chapter"><h2 id="rom-15-kien-truc-nhieu-tang">15. Kiến trúc nhiều tầng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-15-kien-truc-nhieu-tang">#</a></h2>
+<p><img alt="Các lớp dữ liệu từ nguồn đến báo cáo" src="diagrams_fixed/07_dw_layering.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/07_dw_layering.png" rel="noopener" target="_blank"><img alt="Các tầng Data Warehouse" loading="lazy" src="assets/diagrams/07_dw_layering.png"/></a><figcaption>Các tầng Data Warehouse — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<h3 id="rom-y-nghia">Ý nghĩa<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-y-nghia">#</a></h3>
+<ul>
+<li>0th: raw/basic snapshot từ Core/Channel.</li>
+<li>1st: chuẩn hóa, tích hợp customer/account/product.</li>
+<li>2nd: fact/dimension, history, mart nghiệp vụ.</li>
+<li>3rd: KPI, profitability, risk aggregates.</li>
+<li>4th: dashboard/file/report.</li>
+</ul>
+<h3 id="rom-t-1-va-oi-soat">T+1 và đối soát<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-t-1-va-oi-soat">#</a></h3>
+<p>Tài liệu nhấn mạnh “previous day”. Vì vậy:</p>
+<ul>
+<li>Không dùng MIS để xác nhận giao dịch real-time.</li>
+<li>Chỉ publish mart sau khi Core EOD hoàn tất.</li>
+<li>Mỗi tầng cần count/amount reconciliation.</li>
+</ul>
+<h3 id="rom-master-slave-va-scd">Master/Slave và SCD<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-master-slave-va-scd">#</a></h3>
+<ul>
+<li>Master/current dimension không đủ cho báo cáo lịch sử.</li>
+<li>Với SCD Type 2, JOIN theo ngày hiệu lực:</li>
+</ul>
+<pre><code class="language-sql">select t.trx_id,
+       t.trx_date,
+       c.branch_code
+from   fact_transaction t
+join   dim_customer_scd c
+  on   c.customer_no = t.customer_no
+ and   t.trx_date &gt;= c.valid_from
+ and   t.trx_date &lt;  nvl(c.valid_to, date '9999-12-31');
+</code></pre>
+<h3 id="rom-cam-bay-fan-out">Cạm bẫy fan-out<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cam-bay-fan-out">#</a></h3>
+<p>Sai:</p>
+<pre><code class="language-sql">select c.customer_no, sum(c.reported_asset)
+from customer c
+join deposit_account a on a.customer_no = c.customer_no
+group by c.customer_no;
+</code></pre>
+<p>Đúng: aggregate phía account về customer trước khi JOIN.</p>
+<pre><code class="language-sql">with a as (
+    select customer_no, sum(balance) total_balance
+    from deposit_account
+    group by customer_no
+)
+select c.customer_no, c.reported_asset, a.total_balance
+from customer c
+left join a on a.customer_no = c.customer_no;
+</code></pre>
+<h3 id="rom-bang-prefix-uoc-nhac">Bảng/prefix được nhắc<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-bang-prefix-uoc-nhac">#</a></h3>
+<ul>
+<li><code>gdw_com_cus_inf</code>, <code>gdw_com_acct_inf</code>.</li>
+<li><code>gdw_com_cusdep_d</code>, <code>gdw_com_acpl_d</code>.</li>
+<li><code>gdw_rsk_*</code>: risk mart.</li>
+<li><code>pms_*</code>: profitability mart.</li>
+</ul>
+<h3 id="rom-rui-ro-2">Rủi ro<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro-2">#</a></h3>
+<ul>
+<li>ETL chạy trước source cut-off.</li>
+<li>Join sai grain làm phồng số tiền.</li>
+<li>SCD join thiếu thời gian.</li>
+<li>Query report chọc thẳng OLTP.</li>
+<li>Late arriving data không có cơ chế restatement.</li>
+</ul>
+<hr/>
+<h1 id="rom-phan-i-pms-profitability">PHẦN I — PMS / PROFITABILITY<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-i-pms-profitability">#</a></h1>
+</section><section class="chapter"><h2 id="rom-16-cong-thuc-loi-nhuan-quan-tri">16. Công thức lợi nhuận quản trị<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-16-cong-thuc-loi-nhuan-quan-tri">#</a></h2>
+<p>Theo tài liệu:</p>
+<pre><code class="language-text">Net Profit
+= Interest Income
++ Non-interest Income
++ FTP Revenue
+- Interest Expense
+- FTP Cost
+- Cost of Work / ABC Cost
+- Credit Cost
+</code></pre>
+<h3 id="rom-luong-du-lieu">Luồng dữ liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-du-lieu">#</a></h3>
+<p>GL/transaction → COA mapping → interest/non-interest income → FTP → ABC allocation → credit cost → customer/account profitability → roll-up branch/product/group.</p>
+<h3 id="rom-cac-lop-bang">Các lớp bảng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cac-lop-bang">#</a></h3>
+<ul>
+<li>Mapping/common: <code>CMN_*</code>, valuation/COA mapping.</li>
+<li>Account/customer profit: <code>pms_pl_evalt_mas</code>, <code>pms_pl_cus_mas</code>.</li>
+<li>ABC driver: <code>PMS_ABC_DRV_*</code>.</li>
+<li>Profitability analysis: <code>PMS_PL_PA_*</code>, <code>bpms_pl_pa_cus_mas</code>.</li>
+<li>Adjustment: <code>PMS_ADJ_*</code>, đặc biệt <code>pms_adj_trns</code>.</li>
+<li>Time series: <code>pms_pl_evalt_ser_mon</code>.</li>
+</ul>
+<h3 id="rom-abc-costing">ABC Costing<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-abc-costing">#</a></h3>
+<p>Chi phí → Activity → Driver quantity/ratio → Account/Customer/Branch.</p>
+<p>Ví dụ driver: số giao dịch, thời gian xử lý, số tài khoản, số lần in sao kê. Khi denominator = 0, chi phí phải vào bucket “unallocated”, không được divide-by-zero hoặc biến mất.</p>
+<h3 id="rom-invariant-bat-buoc">Invariant bắt buộc<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-invariant-bat-buoc">#</a></h3>
+<p>Tổng profit phân bổ tại các dimension phải reconcile với GL/P&amp;L sau các adjustment hợp lệ và tolerance làm tròn.</p>
+<h3 id="rom-rui-ro-3">Rủi ro<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro-3">#</a></h3>
+<ul>
+<li>COA mới chưa mapping làm doanh thu “rơi khỏi” PMS.</li>
+<li>Job tổng hợp chạy khi ABC/Credit Cost chưa xong làm profit ảo cao.</li>
+<li>Driver sai làm phân bổ chi phí méo.</li>
+<li>Adjustment overwrite system result thay vì lưu riêng.</li>
+<li>Profit sharing ratio không bằng 100% gây double counting.</li>
+</ul>
+<h3 id="rom-thiet-ke-adjustment-an-toan">Thiết kế adjustment an toàn<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-thiet-ke-adjustment-an-toan">#</a></h3>
+<p>Không update trực tiếp kết quả hệ thống. Lưu adjustment riêng:</p>
+<pre><code class="language-sql">select p.entity_id,
+       p.system_profit,
+       nvl(a.adjusted_amount, 0) adjusted_amount,
+       p.system_profit + nvl(a.adjusted_amount, 0) final_profit
+from   pms_profit p
+left join (
+    select entity_id, sum(adjusted_amount) adjusted_amount
+    from pms_adjustment
+    where approval_status = 'APPROVED'
+    group by entity_id
+) a on a.entity_id = p.entity_id;
+</code></pre>
+<hr/>
+<h1 id="rom-phan-j-risk-management">PHẦN J — RISK MANAGEMENT<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-j-risk-management">#</a></h1>
+</section><section class="chapter"><h2 id="rom-17-risk-basics">17. Risk Basics<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-17-risk-basics">#</a></h2>
+<h3 id="rom-bo-ba-tin-dung">Bộ ba tín dụng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-bo-ba-tin-dung">#</a></h3>
+<ul>
+<li><strong>PD:</strong> Probability of Default.</li>
+<li><strong>LGD:</strong> Loss Given Default.</li>
+<li><strong>EAD:</strong> Exposure at Default.</li>
+</ul>
+<p>Công thức ghi nhớ:</p>
+<p><code>Expected Loss = PD × LGD × EAD</code></p>
+<h3 id="rom-rwa-bis">RWA/BIS<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rwa-bis">#</a></h3>
+<p>RWA biến exposure thành tài sản có trọng số rủi ro. Capital adequacy/BIS ratio so sánh vốn đủ điều kiện với RWA theo framework áp dụng.</p>
+<h3 id="rom-alm-liquidity">ALM/Liquidity<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-alm-liquidity">#</a></h3>
+<ul>
+<li>Time bucket dòng tiền.</li>
+<li>LCR: khả năng chịu stress thanh khoản ngắn hạn.</li>
+<li>NSFR: nguồn vốn ổn định dài hạn.</li>
+<li>Phải đồng bộ maturity, repricing date, currency và behavioral assumptions.</li>
+</ul>
+<h3 id="rom-luong-du-lieu-risk">Luồng dữ liệu Risk<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-du-lieu-risk">#</a></h3>
+<p>Core Loan/Deposit/Trade/Treasury → EAD base → collateral/guarantee → customer/group aggregation → engines TE/RWA/ALM/Market Risk → risk mart/report.</p>
+<h3 id="rom-bang-uoc-nhac-2">Bảng được nhắc<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-bang-uoc-nhac-2">#</a></h3>
+<ul>
+<li><code>gdw_rsk_ead_mas</code>, <code>gdw_rsk_ead_sum_mas</code>.</li>
+<li><code>gdw_rsk_cus_inf</code>, <code>gdw_rsk_csum_mas</code>.</li>
+<li><code>gdw_rsk_ibs_dmb_link</code>.</li>
+<li><code>gdw_rsk_alm_est_mas</code>.</li>
+<li><code>gdw_rsk_tot_coa_inf</code>.</li>
+</ul>
+<h3 id="rom-rui-ro-du-lieu">Rủi ro dữ liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro-du-lieu">#</a></h3>
+<ul>
+<li>Chỉ lấy on-balance, bỏ off-balance commitment/guarantee.</li>
+<li>Collateral mapping thiếu hoặc double allocation.</li>
+<li>PD/LGD model version không khớp base date.</li>
+<li>ALM time bucket sai do maturity/repricing date.</li>
+<li>Currency conversion dùng rate không cùng cut-off.</li>
+</ul>
+<h3 id="rom-checklist-khi-ead-rwa-bat-thuong">Checklist khi EAD/RWA bất thường<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-checklist-khi-ead-rwa-bat-thuong">#</a></h3>
+<ol>
+<li>Base date và population.</li>
+<li>On/off balance completeness.</li>
+<li>CCF/guarantee/collateral logic.</li>
+<li>Customer/group mapping.</li>
+<li>Model/risk weight version.</li>
+<li>FX rate.</li>
+<li>Aggregation grain và reconciliation về source.</li>
+</ol>
+<hr/>
+<h1 id="rom-phan-k-infrastructure">PHẦN K — INFRASTRUCTURE<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-k-infrastructure">#</a></h1>
+</section><section class="chapter"><h2 id="rom-18-core-banking-infrastructure">18. Core Banking Infrastructure<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-18-core-banking-infrastructure">#</a></h2>
+<h3 id="rom-mo-hinh">Mô hình<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-mo-hinh">#</a></h3>
+<p><img alt="Hạ tầng ứng dụng, RAC và DR" src="diagrams_fixed/08_infrastructure_rac.png"/></p>
+<details><summary>Mermaid source (tùy chọn)</summary>
+<figure class="diagram-card"><a href="assets/diagrams/08_infrastructure_rac.png" rel="noopener" target="_blank"><img alt="Kiến trúc Application, RAC và DR" loading="lazy" src="assets/diagrams/08_infrastructure_rac.png"/></a><figcaption>Kiến trúc Application, RAC và DR — chạm để mở kích thước đầy đủ</figcaption></figure>
+</details>
+<h3 id="rom-vai-tro">Vai trò<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-vai-tro">#</a></h3>
+<ul>
+<li>DMZ giảm blast radius khi web bị compromise.</li>
+<li>L4 phân phối tải/failover AP.</li>
+<li>AP Active-Active chia tải.</li>
+<li>Tmax/TP monitor quản lý transaction, session, connection pool.</li>
+<li>RAC cung cấp multi-instance HA trên shared database.</li>
+<li>DR bảo vệ trước site disaster; DR không thay thế backup.</li>
+</ul>
+<h3 id="rom-rui-ro-4">Rủi ro<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-rui-ro-4">#</a></h3>
+<ul>
+<li>RAC split-brain/interconnect latency.</li>
+<li>Service placement sai, hot instance.</li>
+<li>L4 health check chỉ kiểm tra port, không kiểm tra business readiness.</li>
+<li>Connection pool cạn do DB chậm/lock/leak.</li>
+<li>DR lag hoặc failover runbook chưa được test.</li>
+</ul>
+<h3 id="rom-quan-sat-theo-lop">Quan sát theo lớp<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-quan-sat-theo-lop">#</a></h3>
+<ol>
+<li>Network: latency, packet loss, firewall.</li>
+<li>L4: active connections, health checks, distribution.</li>
+<li>AP/Tmax: queue, thread/process, pool usage, error rate.</li>
+<li>DB: sessions, blocking, wait events, CPU/I/O, ASM/storage.</li>
+<li>Batch: scheduler, dependency, elapsed time.</li>
+<li>DR: transport/apply lag, recoverability.</li>
+</ol>
+<hr/>
+<h1 id="rom-phan-l-playbook-xu-ly-su-co">PHẦN L — PLAYBOOK XỬ LÝ SỰ CỐ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-l-playbook-xu-ly-su-co">#</a></h1>
+</section><section class="chapter"><h2 id="rom-19-ma-tran-trieu-chung-uong-kiem-tra">19. Ma trận triệu chứng → đường kiểm tra<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-19-ma-tran-trieu-chung-uong-kiem-tra">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Điểm bắt đầu</th>
+<th>Chuỗi kiểm tra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App thành công, GL thiếu</td>
+<td>Glob_id</td>
+<td>Channel → Master/History → Slip → Voucher → GL</td>
+</tr>
+<tr>
+<td>EOD chạy quá lâu</td>
+<td>Job/run ID</td>
+<td>Dependency → blocking → SQL plan → partition pruning → TEMP/I/O</td>
+</tr>
+<tr>
+<td>Accrual bị nhân đôi</td>
+<td>business_date/entity</td>
+<td>Unique key → rerun log → delete scope → posting reconciliation</td>
+</tr>
+<tr>
+<td>Deposit interest sai</td>
+<td>DEP_ACNO</td>
+<td>Rate history → daily balance → intcal → settlement → GL</td>
+</tr>
+<tr>
+<td>Nợ quá hạn chưa lên</td>
+<td>lon_acno/exe_no</td>
+<td>Schedule → payment → past-due job → history → mart/report</td>
+</tr>
+<tr>
+<td>ATM timeout/khách bị trừ tiền</td>
+<td>trace no/idempotency key</td>
+<td>Channel log → Core commit → switch response → reversal/retry</td>
+</tr>
+<tr>
+<td>SWIFT stuck</td>
+<td>message reference</td>
+<td>Screening → approval → BIC → Alliance status → correspondent</td>
+</tr>
+<tr>
+<td>Báo cáo bị phồng</td>
+<td>report grain</td>
+<td>Join cardinality → pre-aggregation → SCD join → duplicate key</td>
+</tr>
+<tr>
+<td>MIS lệch Core</td>
+<td>base date</td>
+<td>Source EOD → extract count/amount → rejects → transformations → mart</td>
+</tr>
+<tr>
+<td>PMS lệch GL</td>
+<td>COA/base month</td>
+<td>Mapping → dependencies → ABC/Credit Cost → adjustment → rounding</td>
+</tr>
+<tr>
+<td>EAD/RWA tăng đột biến</td>
+<td>base date/model version</td>
+<td>Population → off-balance → collateral → FX → risk weight → aggregation</td>
+</tr>
+<tr>
+<td>Toàn hệ thống chậm</td>
+<td>service/time window</td>
+<td>L4/AP queue → pool → DB sessions/waits → blocking → I/O/ASM</td>
+</tr>
+</tbody>
+</table>
+</section><section class="chapter"><h2 id="rom-20-bo-cau-hoi-phai-hoi-truoc-khi-sua-du-lieu">20. Bộ câu hỏi phải hỏi trước khi sửa dữ liệu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-20-bo-cau-hoi-phai-hoi-truoc-khi-sua-du-lieu">#</a></h2>
+<ol>
+<li>Business date nào?</li>
+<li>Grain của record là gì?</li>
+<li>ID truy vết xuyên luồng là gì?</li>
+<li>Source of truth nằm ở bảng nào?</li>
+<li>Dữ liệu là trạng thái hiện tại hay history?</li>
+<li>Có job bất đồng bộ nào chưa hoàn tất không?</li>
+<li>Có thể rerun an toàn không?</li>
+<li>Reconciliation invariant là gì?</li>
+<li>Sửa một dòng sẽ ảnh hưởng bảng downstream nào?</li>
+<li>Rollback và audit evidence là gì?</li>
+</ol>
+<hr/>
+<h1 id="rom-phan-m-mau-sql-an-toan-cho-oracle">PHẦN M — MẪU SQL AN TOÀN CHO ORACLE<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-m-mau-sql-an-toan-cho-oracle">#</a></h1>
+</section><section class="chapter"><h2 id="rom-21-kiem-tra-duplicate-theo-natural-key">21. Kiểm tra duplicate theo natural key<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-21-kiem-tra-duplicate-theo-natural-key">#</a></h2>
+<pre><code class="language-sql">select business_date, entity_id, process_type, count(*) cnt
+from   target_table
+where  business_date = :p_business_date
+group  by business_date, entity_id, process_type
+having count(*) &gt; 1;
+</code></pre>
+</section><section class="chapter"><h2 id="rom-22-merge-idempotent">22. MERGE idempotent<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-22-merge-idempotent">#</a></h2>
+<pre><code class="language-sql">merge into target_table t
+using (
+    select :p_business_date business_date,
+           s.entity_id,
+           s.amount
+    from   source_table s
+    where  s.business_date = :p_business_date
+) s
+on (    t.business_date = s.business_date
+    and t.entity_id     = s.entity_id )
+when matched then update
+    set t.amount        = s.amount,
+        t.updated_at    = systimestamp
+when not matched then insert
+    (business_date, entity_id, amount, created_at)
+values
+    (s.business_date, s.entity_id, s.amount, systimestamp);
+</code></pre>
+</section><section class="chapter"><h2 id="rom-23-pre-aggregate-truoc-join">23. Pre-aggregate trước JOIN<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-23-pre-aggregate-truoc-join">#</a></h2>
+<pre><code class="language-sql">with trx as (
+    select account_no,
+           sum(amount) total_amount
+    from   transaction_history
+    where  trx_date &gt;= :p_from_date
+    and    trx_date &lt;  :p_to_date + 1
+    group  by account_no
+)
+select a.account_no,
+       a.current_balance,
+       nvl(t.total_amount, 0) total_amount
+from   account_master a
+left join trx t on t.account_no = a.account_no;
+</code></pre>
+</section><section class="chapter"><h2 id="rom-24-detect-orphan-record">24. Detect orphan record<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-24-detect-orphan-record">#</a></h2>
+<pre><code class="language-sql">select h.*
+from   account_history h
+where  not exists (
+    select 1
+    from account_master m
+    where m.account_no = h.account_no
+);
+</code></pre>
+</section><section class="chapter"><h2 id="rom-25-reconciliation-source-target">25. Reconciliation source/target<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-25-reconciliation-source-target">#</a></h2>
+<pre><code class="language-sql">with src as (
+    select count(*) cnt, sum(nvl(amount,0)) amt
+    from source_table
+    where business_date = :p_business_date
+), tgt as (
+    select count(*) cnt, sum(nvl(amount,0)) amt
+    from target_table
+    where business_date = :p_business_date
+)
+select src.cnt src_cnt,
+       tgt.cnt tgt_cnt,
+       src.amt src_amt,
+       tgt.amt tgt_amt,
+       src.cnt - tgt.cnt cnt_diff,
+       src.amt - tgt.amt amt_diff
+from src cross join tgt;
+</code></pre>
+<hr/>
+<h1 id="rom-phan-n-cach-hoc-va-hoi-kien-thuc">PHẦN N — CÁCH HỌC VÀ HỒI KIẾN THỨC<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-n-cach-hoc-va-hoi-kien-thuc">#</a></h1>
+</section><section class="chapter"><h2 id="rom-26-thu-tu-hoc-toi-uu">26. Thứ tự học tối ưu<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-26-thu-tu-hoc-toi-uu">#</a></h2>
+<ol>
+<li>Transaction → Master/History → Slip/Voucher/GL.</li>
+<li>Deposit và Loan key chain.</li>
+<li>EOD/Accrual/FTP/Netting.</li>
+<li>Channel và International Payment.</li>
+<li>DW/MIS: grain, SCD, anti-duplication.</li>
+<li>PMS và Risk.</li>
+<li>Infrastructure và incident tracing.</li>
+</ol>
+</section><section class="chapter"><h2 id="rom-27-phuong-phap-5-phut">27. Phương pháp 5 phút<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-27-phuong-phap-5-phut">#</a></h2>
+<p>Mỗi module tự trả lời năm câu:</p>
+<ol>
+<li><strong>Input là gì?</strong></li>
+<li><strong>ID/PK xuyên suốt là gì?</strong></li>
+<li><strong>Bảng Master và History nào?</strong></li>
+<li><strong>Job bất đồng bộ/EOD nào?</strong></li>
+<li><strong>Invariant/reconciliation nào chứng minh kết quả đúng?</strong></li>
+</ol>
+</section><section class="chapter"><h2 id="rom-28-moc-tri-nho">28. Móc trí nhớ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-28-moc-tri-nho">#</a></h2>
+<ul>
+<li><strong>AML:</strong> “Biết người → lọc người → chấm người → giám sát giao dịch”.</li>
+<li><strong>Accounting:</strong> “Sự kiện thành Slip, kế toán thành Voucher, số dư vào GL”.</li>
+<li><strong>Deposit:</strong> “DEP_ACNO là gốc; số hiển thị chỉ là mặt tiền”.</li>
+<li><strong>Loan:</strong> “Line che Account, Account chứa Execution, Execution sinh Schedule”.</li>
+<li><strong>Channel:</strong> “Timeout không nói được commit hay chưa”.</li>
+<li><strong>DW:</strong> “Gom N trước khi gặp 1; JOIN lịch sử phải kèm ngày”.</li>
+<li><strong>PMS:</strong> “Thu nhập + FTP − chi phí − rủi ro”.</li>
+<li><strong>Risk:</strong> “PD × LGD × EAD; đừng quên ngoại bảng”.</li>
+<li><strong>Infra:</strong> “Theo dõi từ L4 → AP/Pool → DB Wait → Storage”.</li>
+</ul>
+<hr/>
+</section><section class="chapter"><h2 id="rom-29-ranh-gioi-giua-du-kien-va-suy-luan">29. Ranh giới giữa dữ kiện và suy luận<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-29-ranh-gioi-giua-du-kien-va-suy-luan">#</a></h2>
+<p>Khi trả lời câu hỏi dựa trên bộ ROM này, nên phân loại:</p>
+<ul>
+<li><strong>[SOURCE]</strong>: nội dung được nêu trực tiếp trong file.</li>
+<li><strong>[INFERENCE]</strong>: suy luận kiến trúc/kỹ thuật hợp lý từ nội dung.</li>
+<li><strong>[VERIFY]</strong>: thông tin cần đối chiếu policy, data dictionary, source code hoặc Production log.</li>
+</ul>
+<p>Điều này đặc biệt quan trọng với threshold AML, cut-off, tên bảng, status code, công thức lãi và quy định pháp lý.</p>
+</section>
+</section>
+<section class="tab-panel" data-panel="recall"><section class="chapter prelude"><h1 id="recall-data-workflow-active-recall-cau-hoi-hoc-bua">DATA WORKFLOW — ACTIVE RECALL &amp; CÂU HỎI HÓC BÚA<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-data-workflow-active-recall-cau-hoi-hoc-bua">#</a></h1>
+<blockquote>
+<p>Không đọc đáp án ngay. Trả lời bằng miệng hoặc viết sơ đồ trước, sau đó mới kiểm tra.</p>
+</blockquote>
+<hr/>
+</section><section class="chapter"><h2 id="recall-a-66-flashcards">A. 66 Flashcards<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-a-66-flashcards">#</a></h2>
+<h3 id="recall-customer-aml">Customer &amp; AML<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-customer-aml">#</a></h3>
+<ol>
+<li><strong>Q:</strong> Luồng KYC/AML tối giản?<br/>
+<strong>A:</strong> CDD/KYC → Watchlist → Risk Assessment → EDD nếu cần → Transaction Monitoring → Case/CTR/STR.</li>
+<li><strong>Q:</strong> Integration key khách hàng trong tài liệu?<br/>
+<strong>A:</strong> <code>sh + lcl + corp_c + cusno</code>.</li>
+<li><strong>Q:</strong> Vì sao Customer Change Info quan trọng?<br/>
+<strong>A:</strong> Thay đổi nghề nghiệp, quốc tịch, địa chỉ, ownership có thể làm thay đổi risk score và kích hoạt re-assessment.</li>
+<li><strong>Q:</strong> False positive khác false negative thế nào?<br/>
+<strong>A:</strong> False positive chặn nhầm; false negative bỏ sót đối tượng rủi ro.</li>
+<li><strong>Q:</strong> Alert TMS có đồng nghĩa STR không?<br/>
+<strong>A:</strong> Không. Alert cần điều tra/case decision.</li>
+<li><strong>Q:</strong> Trước khi áp dụng ngưỡng AML trong file cần làm gì?<br/>
+<strong>A:</strong> Đối chiếu policy và quy định hiện hành.</li>
+</ol>
+<h3 id="recall-transaction-accounting">Transaction &amp; Accounting<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-transaction-accounting">#</a></h3>
+<ol start="7">
+<li><strong>Q:</strong> Glob_id dùng làm gì?<br/>
+<strong>A:</strong> Truy vết cùng một giao dịch qua Channel, module nghiệp vụ, Slip, Voucher và GL.</li>
+<li><strong>Q:</strong> Master và History khác nhau?<br/>
+<strong>A:</strong> Master giữ trạng thái hiện tại; History giữ sự kiện biến động append-only.</li>
+<li><strong>Q:</strong> Slip khác Voucher?<br/>
+<strong>A:</strong> Slip là chứng từ/sự kiện gốc; Voucher là bút toán DR/CR.</li>
+<li><strong>Q:</strong> Vì sao hạch toán GL thường bất đồng bộ?<br/>
+<strong>A:</strong> Giảm latency giao dịch realtime và tách tải accounting.</li>
+<li><strong>Q:</strong> Bốn chiều composite key GL trong tài liệu?<br/>
+<strong>A:</strong> Standard date, branch, COA, currency.</li>
+<li><strong>Q:</strong> App thành công nhưng GL thiếu kiểm tra gì đầu tiên?<br/>
+<strong>A:</strong> Glob_id và chuỗi Master/History → Slip → Voucher → GL.</li>
+</ol>
+<h3 id="recall-eod-ftp">EOD/FTP<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-eod-ftp">#</a></h3>
+<ol start="13">
+<li><strong>Q:</strong> Công thức FTP cơ bản trong file?<br/>
+<strong>A:</strong> Average balance × FTP rate × day/365.</li>
+<li><strong>Q:</strong> Tại sao cần Summary Posting?<br/>
+<strong>A:</strong> Giảm hàng triệu DML vào GL xuống posting tổng hợp theo COA/branch/currency.</li>
+<li><strong>Q:</strong> Invariant Inter-office?<br/>
+<strong>A:</strong> Tổng net toàn hệ thống phải cân bằng theo thiết kế.</li>
+<li><strong>Q:</strong> Tại sao rerun EOD nguy hiểm?<br/>
+<strong>A:</strong> Có thể nhân đôi accrual/posting nếu không idempotent.</li>
+<li><strong>Q:</strong> Hai lỗi ngày tháng phổ biến?<br/>
+<strong>A:</strong> Năm nhuận/day-count và holiday/business-date treatment.</li>
+<li><strong>Q:</strong> Kiểu dữ liệu tiền tệ?<br/>
+<strong>A:</strong> NUMBER/DECIMAL, không FLOAT.</li>
+</ol>
+<h3 id="recall-deposit">Deposit<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-deposit">#</a></h3>
+<ol start="19">
+<li><strong>Q:</strong> DEP_ACNO khác LCL_ACNO?<br/>
+<strong>A:</strong> DEP_ACNO là surrogate key ổn định; LCL_ACNO là số hiển thị/mapping.</li>
+<li><strong>Q:</strong> Bảng account master chung?<br/>
+<strong>A:</strong> <code>gdc_ac_mas</code>.</li>
+<li><strong>Q:</strong> Bảng transaction history chính?<br/>
+<strong>A:</strong> <code>gdc_trx_his</code>.</li>
+<li><strong>Q:</strong> Bảng audit thay đổi master?<br/>
+<strong>A:</strong> <code>gdc_maschgdt_his</code>.</li>
+<li><strong>Q:</strong> Công thức balance trong tài liệu?<br/>
+<strong>A:</strong> DEP AC BLC = PABL BLC + PMT RSTRT AMT.</li>
+<li><strong>Q:</strong> Khi cho rút tiền kiểm tra số dư nào?<br/>
+<strong>A:</strong> Available/payable balance, không chỉ ledger balance.</li>
+<li><strong>Q:</strong> PK History thường thế nào?<br/>
+<strong>A:</strong> DEP_ACNO + history/serial number.</li>
+<li><strong>Q:</strong> Hai rủi ro lớn của <code>gdc_trx_his</code>?<br/>
+<strong>A:</strong> Tăng trưởng dữ liệu và I/O/partition pruning.</li>
+</ol>
+<h3 id="recall-loan-collateral">Loan &amp; Collateral<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-loan-collateral">#</a></h3>
+<ol start="27">
+<li><strong>Q:</strong> Cây tín dụng ba cấp?<br/>
+<strong>A:</strong> Credit Line → Loan Account → Execution.</li>
+<li><strong>Q:</strong> Chuỗi key từ application đến execution?<br/>
+<strong>A:</strong> brw_aplct_no → lon_imt_no → lon_acno → exe_no.</li>
+<li><strong>Q:</strong> Bảng schedule?<br/>
+<strong>A:</strong> <code>gle_schd_mas</code>.</li>
+<li><strong>Q:</strong> Bảng overdue history?<br/>
+<strong>A:</strong> <code>gle_schdpst_his</code>.</li>
+<li><strong>Q:</strong> Vì sao collateral tách module?<br/>
+<strong>A:</strong> Quan hệ many-to-many, nhiều loại tài sản, appraisal/version/allocation riêng.</li>
+<li><strong>Q:</strong> Fixed principal khác annuity?<br/>
+<strong>A:</strong> Fixed principal gốc đều; annuity tổng kỳ trả tương đối cố định.</li>
+<li><strong>Q:</strong> Nợ quá hạn nên dựa trên gì?<br/>
+<strong>A:</strong> Schedule + actual payment + business date, không chỉ current balance.</li>
+</ol>
+<h3 id="recall-fx-trade-treasury">FX/Trade/Treasury<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-fx-trade-treasury">#</a></h3>
+<ol start="34">
+<li><strong>Q:</strong> Buying/Selling nhìn từ góc nào?<br/>
+<strong>A:</strong> Góc nhìn ngân hàng.</li>
+<li><strong>Q:</strong> Settle Bank làm gì?<br/>
+<strong>A:</strong> Trung gian thanh toán qua quan hệ Nostro/Vostro.</li>
+<li><strong>Q:</strong> BIC dùng để làm gì?<br/>
+<strong>A:</strong> Định tuyến ngân hàng/chi nhánh trên SWIFT.</li>
+<li><strong>Q:</strong> Timeout SWIFT nguy hiểm gì?<br/>
+<strong>A:</strong> Message có thể đã gửi nhưng response mất; retry có thể duplicate.</li>
+<li><strong>Q:</strong> D/P khác D/A?<br/>
+<strong>A:</strong> D/P giao chứng từ khi thanh toán; D/A giao khi chấp nhận hối phiếu.</li>
+<li><strong>Q:</strong> Treasury deal flow?<br/>
+<strong>A:</strong> Capture → confirmation → settlement → position → valuation → accounting → reconciliation.</li>
+<li><strong>Q:</strong> M2M phụ thuộc dữ liệu gì?<br/>
+<strong>A:</strong> Market price/rate feed đúng thời điểm và đúng instrument.</li>
+</ol>
+<h3 id="recall-reconciliation-channel">Reconciliation &amp; Channel<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-reconciliation-channel">#</a></h3>
+<ol start="41">
+<li><strong>Q:</strong> Shadow và Actual?<br/>
+<strong>A:</strong> Shadow là dự kiến nội bộ; Actual là sao kê/thực tế từ correspondent.</li>
+<li><strong>Q:</strong> Vì sao không match chỉ bằng amount?<br/>
+<strong>A:</strong> Nhiều giao dịch cùng số tiền; cần value date/currency/reference/direction.</li>
+<li><strong>Q:</strong> ATM trace key trong tài liệu?<br/>
+<strong>A:</strong> <code>atm_trx_trace_no</code>.</li>
+<li><strong>Q:</strong> UMS queue table?<br/>
+<strong>A:</strong> <code>gms_dspch_mas</code>.</li>
+<li><strong>Q:</strong> SMS fail có nghĩa giao dịch fail không?<br/>
+<strong>A:</strong> Không; notification là luồng bất đồng bộ riêng.</li>
+<li><strong>Q:</strong> Ba khả năng khi timeout?<br/>
+<strong>A:</strong> Chưa tới Core; rollback; đã commit nhưng mất response.</li>
+</ol>
+<h3 id="recall-mis-dw">MIS/DW<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-mis-dw">#</a></h3>
+<ol start="47">
+<li><strong>Q:</strong> Các tầng mart?<br/>
+<strong>A:</strong> Basic → Integration → Detailed → KPI/Management → Report.</li>
+<li><strong>Q:</strong> MIS trong tài liệu chủ yếu real-time hay T+1?<br/>
+<strong>A:</strong> T+1/previous day.</li>
+<li><strong>Q:</strong> Luật chống fan-out?<br/>
+<strong>A:</strong> Aggregate phía N về đúng grain trước khi JOIN phía 1.</li>
+<li><strong>Q:</strong> SCD Type 2 JOIN thêm điều kiện gì?<br/>
+<strong>A:</strong> Ngày giao dịch nằm trong khoảng hiệu lực dimension.</li>
+<li><strong>Q:</strong> Tại sao không query report trực tiếp Core?<br/>
+<strong>A:</strong> Ảnh hưởng OLTP, lock/I/O và không đảm bảo snapshot nhất quán.</li>
+<li><strong>Q:</strong> Job ETL success đã đủ chưa?<br/>
+<strong>A:</strong> Chưa; phải reconciliation count/amount/source-target.</li>
+</ol>
+<h3 id="recall-pms">PMS<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-pms">#</a></h3>
+<ol start="53">
+<li><strong>Q:</strong> Công thức Net Profit nén?<br/>
+<strong>A:</strong> Income + FTP revenue − expenses − FTP cost − ABC cost − credit cost.</li>
+<li><strong>Q:</strong> FTP giúp đánh giá chi nhánh thế nào?<br/>
+<strong>A:</strong> Tách hiệu quả huy động và cho vay qua giá vốn nội bộ.</li>
+<li><strong>Q:</strong> Cost driver là gì?<br/>
+<strong>A:</strong> Tiêu chí/trọng số phân bổ chi phí hoạt động.</li>
+<li><strong>Q:</strong> Prefix output profitability?<br/>
+<strong>A:</strong> <code>PMS_PL_PA_*</code> / <code>bpms_pl_pa_*</code>.</li>
+<li><strong>Q:</strong> Unmapped COA gây gì?<br/>
+<strong>A:</strong> Doanh thu/chi phí bị bỏ khỏi PMS, làm lệch GL.</li>
+<li><strong>Q:</strong> Adjustment nên lưu thế nào?<br/>
+<strong>A:</strong> Bảng riêng, có approval/audit, cộng vào system result khi report.</li>
+</ol>
+<h3 id="recall-risk-infrastructure">Risk &amp; Infrastructure<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-risk-infrastructure">#</a></h3>
+<ol start="59">
+<li><strong>Q:</strong> Expected Loss formula?<br/>
+<strong>A:</strong> PD × LGD × EAD.</li>
+<li><strong>Q:</strong> Lỗi EAD phổ biến?<br/>
+<strong>A:</strong> Bỏ quên off-balance commitments/guarantees.</li>
+<li><strong>Q:</strong> ALM phụ thuộc các ngày nào?<br/>
+<strong>A:</strong> Maturity, repricing, behavioral date/time bucket.</li>
+<li><strong>Q:</strong> RAC mang lại gì?<br/>
+<strong>A:</strong> Nhiều instance truy cập shared database để HA/scale service.</li>
+<li><strong>Q:</strong> Split-brain là gì?<br/>
+<strong>A:</strong> Các node mất liên lạc và cùng nghĩ node kia chết, gây nguy cơ xung đột.</li>
+<li><strong>Q:</strong> Connection pool cạn thường là nguyên nhân hay triệu chứng?<br/>
+<strong>A:</strong> Thường là triệu chứng của DB chậm, lock, leak hoặc tải tăng.</li>
+<li><strong>Q:</strong> DR có thay backup không?<br/>
+<strong>A:</strong> Không; DR có thể replicate cả lỗi logic/ransomware/corruption.</li>
+<li><strong>Q:</strong> Trình tự quan sát hệ thống chậm?<br/>
+<strong>A:</strong> L4 → AP/Tmax queue/pool → DB sessions/waits/locks → storage/ASM.</li>
+</ol>
+<hr/>
+</section><section class="chapter"><h2 id="recall-b-24-cau-hoi-hoc-bua-co-ap-an">B. 24 câu hỏi hóc búa có đáp án<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-b-24-cau-hoi-hoc-bua-co-ap-an">#</a></h2>
+<h3 id="recall-1-app-tra-success-tai-khoan-khach-a-tang-nhung-gl-khong-oi-co-nen-update-gl-bang-tay">1. App trả SUCCESS, tài khoản khách đã tăng nhưng GL không đổi. Có nên UPDATE GL bằng tay?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-1-app-tra-success-tai-khoan-khach-a-tang-nhung-gl-khong-oi-co-nen-update-gl-bang-tay">#</a></h3>
+<p><strong>Đáp án:</strong> Chưa. Truy theo Glob_id để xác định Master/History, Slip, Voucher và background consumer. Nếu sửa GL trước, có thể job retry post lần nữa gây double posting. Chỉ điều chỉnh sau khi có root cause, reconciliation và approval.</p>
+<h3 id="recall-2-mot-bao-cao-customer-balance-tang-gap-ba-sau-khi-them-join-customer-contact-vi-sao">2. Một báo cáo customer balance tăng gấp ba sau khi thêm JOIN customer_contact. Vì sao?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-2-mot-bao-cao-customer-balance-tang-gap-ba-sau-khi-them-join-customer-contact-vi-sao">#</a></h3>
+<p><strong>Đáp án:</strong> Customer-contact có thể 1:N, làm account/customer rows fan-out. Aggregate contact hoặc chọn một record hiệu lực trước khi JOIN; xác nhận grain từng CTE.</p>
+<h3 id="recall-3-etl-count-khop-nhung-amount-lech-nhung-kha-nang-nao">3. ETL count khớp nhưng amount lệch. Những khả năng nào?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-3-etl-count-khop-nhung-amount-lech-nhung-kha-nang-nao">#</a></h3>
+<p><strong>Đáp án:</strong> Numeric conversion/rounding, duplicate có amount đối nghịch, reject/NULL, FX rate, sign DR/CR, filter status, late update, cùng count nhưng record khác.</p>
+<h3 id="recall-4-eod-job-accrual-chay-lai-va-amount-gap-oi-thiet-ke-sua-can-co">4. EOD job accrual chạy lại và amount gấp đôi. Thiết kế sửa căn cơ?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-4-eod-job-accrual-chay-lai-va-amount-gap-oi-thiet-ke-sua-can-co">#</a></h3>
+<p><strong>Đáp án:</strong> Unique key theo business_date + account + accrual_type; MERGE hoặc replace có kiểm soát; run ledger/checkpoint; reconciliation trước posting; tách detail và posting status.</p>
+<h3 id="recall-5-tai-khoan-co-ledger-balance-100-trieu-nhung-chi-rut-uoc-20-trieu-co-phai-loi">5. Tài khoản có ledger balance 100 triệu nhưng chỉ rút được 20 triệu. Có phải lỗi?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-5-tai-khoan-co-ledger-balance-100-trieu-nhung-chi-rut-uoc-20-trieu-co-phai-loi">#</a></h3>
+<p><strong>Đáp án:</strong> Chưa chắc. Kiểm tra hold/restricted amount và PABL/available balance. Công thức nguồn cho thấy ledger gồm available + restricted.</p>
+<h3 id="recall-6-oi-so-tai-khoan-ep-co-phai-update-toan-bo-gdc-trx-his">6. Đổi số tài khoản đẹp có phải update toàn bộ <code>gdc_trx_his</code>?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-6-oi-so-tai-khoan-ep-co-phai-update-toan-bo-gdc-trx-his">#</a></h3>
+<p><strong>Đáp án:</strong> Không nếu thiết kế đúng. History nối bằng DEP_ACNO surrogate; chỉ thay/mapping LCL_ACNO và audit.</p>
+<h3 id="recall-7-mot-khoan-vay-co-balance-nhung-khong-co-overdue-record-du-qua-due-date">7. Một khoản vay có balance nhưng không có overdue record dù quá due date.<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-7-mot-khoan-vay-co-balance-nhung-khong-co-overdue-record-du-qua-due-date">#</a></h3>
+<p><strong>Đáp án:</strong> Kiểm tra schedule item, payment allocation, holiday/business date, account status và job tạo <code>gle_schdpst_his</code>. Balance không đủ để kết luận overdue.</p>
+<h3 id="recall-8-mot-collateral-ang-bao-am-hai-khoan-vay-la-loi-hay-hop-le">8. Một collateral đang bảo đảm hai khoản vay. Là lỗi hay hợp lệ?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-8-mot-collateral-ang-bao-am-hai-khoan-vay-la-loi-hay-hop-le">#</a></h3>
+<p><strong>Đáp án:</strong> Có thể hợp lệ nếu module hỗ trợ allocation. Phải kiểm tra eligible value, allocation ratio, priority và tổng allocated không vượt hạn mức.</p>
+<h3 id="recall-9-swift-outbound-timeout-operator-nhan-gui-lai-ngay-co-an-toan-khong">9. SWIFT outbound timeout. Operator nhấn gửi lại ngay có an toàn không?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-9-swift-outbound-timeout-operator-nhan-gui-lai-ngay-co-an-toan-khong">#</a></h3>
+<p><strong>Đáp án:</strong> Không. Kiểm tra unique reference, Alliance/message status và correspondent acknowledgment. Timeout có thể xảy ra sau khi message đã được gửi.</p>
+<h3 id="recall-10-safe-watch-backlog-tang-manh-sau-khi-update-list-uu-tien-xu-ly-gi">10. Safe Watch backlog tăng mạnh sau khi update list. Ưu tiên xử lý gì?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-10-safe-watch-backlog-tang-manh-sau-khi-update-list-uu-tien-xu-ly-gi">#</a></h3>
+<p><strong>Đáp án:</strong> Đánh giá rule/matching threshold, transliteration, list version, false-positive distribution; không bypass screening. Phân luồng case theo risk và SLA.</p>
+<h3 id="recall-11-nostro-reconciliation-co-hai-dong-cung-amount-date-match-the-nao">11. Nostro reconciliation có hai dòng cùng amount/date. Match thế nào?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-11-nostro-reconciliation-co-hai-dong-cung-amount-date-match-the-nao">#</a></h3>
+<p><strong>Đáp án:</strong> Dùng thêm currency, direction, reference, counterparty, sequence/value timestamp; giữ confidence score và manual review nếu ambiguous.</p>
+<h3 id="recall-12-atm-timeout-nhung-core-a-debit-luong-nao-can-kiem-tra">12. ATM timeout nhưng Core đã debit. Luồng nào cần kiểm tra?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-12-atm-timeout-nhung-core-a-debit-luong-nao-can-kiem-tra">#</a></h3>
+<p><strong>Đáp án:</strong> Trace no/idempotency key → Core commit → switch/network response → reversal advice/timeout rule → settlement. Không debit lần hai khi retry.</p>
+<h3 id="recall-13-mis-khong-thay-giao-dich-vua-phat-sinh-10-phut-truoc-co-phai-etl-loi">13. MIS không thấy giao dịch vừa phát sinh 10 phút trước. Có phải ETL lỗi?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-13-mis-khong-thay-giao-dich-vua-phat-sinh-10-phut-truoc-co-phai-etl-loi">#</a></h3>
+<p><strong>Đáp án:</strong> Không nhất thiết. Tài liệu mô tả MIS T+1/previous day. Dùng OLTP/channel log cho realtime.</p>
+<h3 id="recall-14-join-scd-customer-chi-bang-customer-no-gay-loi-gi">14. JOIN SCD customer chỉ bằng customer_no gây lỗi gì?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-14-join-scd-customer-chi-bang-customer-no-gay-loi-gi">#</a></h3>
+<p><strong>Đáp án:</strong> Một fact match nhiều version dimension, fan-out và gán sai branch/manager lịch sử. Cần effective-date join.</p>
+<h3 id="recall-15-pms-profit-cao-bat-thuong-nhung-revenue-khop-gl-nghi-ngo-gi">15. PMS profit cao bất thường nhưng revenue khớp GL. Nghi ngờ gì?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-15-pms-profit-cao-bat-thuong-nhung-revenue-khop-gl-nghi-ngo-gi">#</a></h3>
+<p><strong>Đáp án:</strong> ABC/Credit Cost job chưa hoàn tất, dependency sai, driver bằng 0, hoặc adjustment chưa apply. Kiểm tra job chain trước revenue.</p>
+<h3 id="recall-16-tong-profit-customer-khong-bang-gl-p-l-nhung-nhom-nguyen-nhan">16. Tổng profit customer không bằng GL P&amp;L. Những nhóm nguyên nhân?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-16-tong-profit-customer-khong-bang-gl-p-l-nhung-nhom-nguyen-nhan">#</a></h3>
+<p><strong>Đáp án:</strong> Unmapped COA, orphan customer/account, incomplete dependency, rounding, adjustment, excluded product, duplicate allocation/profit sharing.</p>
+<h3 id="recall-17-cost-driver-denominator-bang-0-xu-ly-the-nao">17. Cost driver denominator bằng 0 xử lý thế nào?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-17-cost-driver-denominator-bang-0-xu-ly-the-nao">#</a></h3>
+<p><strong>Đáp án:</strong> Không chia. Đưa chi phí vào unallocated bucket hoặc rule fallback có phê duyệt và audit.</p>
+<h3 id="recall-18-ead-giam-manh-sau-khi-release-moi-ieu-tra-gi">18. EAD giảm mạnh sau khi release mới. Điều tra gì?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-18-ead-giam-manh-sau-khi-release-moi-ieu-tra-gi">#</a></h3>
+<p><strong>Đáp án:</strong> Off-balance feed, CCF, population filter, collateral netting, group/customer mapping, model version, base date và FX rate.</p>
+<h3 id="recall-19-rwa-tang-nhung-ead-khong-oi-co-the-do-au">19. RWA tăng nhưng EAD không đổi. Có thể do đâu?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-19-rwa-tang-nhung-ead-khong-oi-co-the-do-au">#</a></h3>
+<p><strong>Đáp án:</strong> Risk weight/model/rating/collateral eligibility thay đổi, currency/sovereign mapping, maturity bucket hoặc regulatory rule version.</p>
+<h3 id="recall-20-l4-bao-healthy-nhung-khach-khong-giao-dich-uoc-vi-sao">20. L4 báo healthy nhưng khách không giao dịch được. Vì sao?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-20-l4-bao-healthy-nhung-khach-khong-giao-dich-uoc-vi-sao">#</a></h3>
+<p><strong>Đáp án:</strong> Health check có thể chỉ kiểm port. AP/Tmax hết thread/pool, DB service unavailable hoặc business dependency fail. Cần deep health check.</p>
+<h3 id="recall-21-connection-pool-100-db-cpu-thap-ieu-nay-loai-tru-db-khong">21. Connection pool 100%, DB CPU thấp. Điều này loại trừ DB không?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-21-connection-pool-100-db-cpu-thap-ieu-nay-loai-tru-db-khong">#</a></h3>
+<p><strong>Đáp án:</strong> Không. Có thể sessions chờ lock/network/commit/I/O hoặc leak, nên CPU thấp nhưng response chậm. Kiểm tra waits và blockers.</p>
+<h3 id="recall-22-rac-node-bi-eviction-ieu-tra-uu-tien">22. RAC node bị eviction. Điều tra ưu tiên?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-22-rac-node-bi-eviction-ieu-tra-uu-tien">#</a></h3>
+<p><strong>Đáp án:</strong> Clusterware logs, interconnect latency/loss, storage heartbeat, CPU starvation, time sync và network changes. Không chỉ nhìn alert log database.</p>
+<h3 id="recall-23-source-va-target-amount-khop-nhung-report-sai-theo-branch-vi-sao">23. Source và target amount khớp nhưng report sai theo branch. Vì sao?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-23-source-va-target-amount-khop-nhung-report-sai-theo-branch-vi-sao">#</a></h3>
+<p><strong>Đáp án:</strong> Tổng toàn hàng che giấu sai phân bổ dimension. Reconcile theo nhiều cấp: total → currency → product → branch → account sample.</p>
+<h3 id="recall-24-mot-hot-account-nhan-hang-nghin-giao-dich-giay-gay-row-lock-giai-phap-kien-truc">24. Một hot account nhận hàng nghìn giao dịch/giây gây row lock. Giải pháp kiến trúc?<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-24-mot-hot-account-nhan-hang-nghin-giao-dich-giay-gay-row-lock-giai-phap-kien-truc">#</a></h3>
+<p><strong>Đáp án:</strong> Giảm update hotspot: ledger/event append, sharded counters/buckets, queue/serialization hợp lý, optimistic design, batch aggregation; phải giữ consistency và account balance semantics.</p>
+<hr/>
+</section><section class="chapter"><h2 id="recall-c-bai-tap-ve-lai-tu-tri-nho">C. Bài tập vẽ lại từ trí nhớ<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#recall-c-bai-tap-ve-lai-tu-tri-nho">#</a></h2>
+<ol>
+<li>Vẽ Channel → Core → Slip → Voucher → GL.</li>
+<li>Vẽ cây Loan: Line → Account → Execution → Schedule.</li>
+<li>Vẽ Deposit: DEP_ACNO → Master/Sub-master → Transaction/Interest History.</li>
+<li>Vẽ EOD: Account detail → Accrual/FTP → Group by COA → Netting → GL/PMS.</li>
+<li>Vẽ DW 5 tầng và ghi rõ T+1.</li>
+<li>Vẽ PMS: GL → Mapping → FTP/ABC/Credit Cost → PA Customer → Branch/Product.</li>
+<li>Vẽ Risk: Exposure → Collateral → EAD → PD/LGD → EL/RWA/ALM.</li>
+</ol>
+</section></section>
+<section class="tab-panel" data-panel="tables"><section class="chapter prelude"><h1 id="tables-chi-muc-ten-bang-oi-tuong-xuat-hien-trong-tai-lieu-nguon">Chỉ mục tên bảng/đối tượng xuất hiện trong tài liệu nguồn<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#tables-chi-muc-ten-bang-oi-tuong-xuat-hien-trong-tai-lieu-nguon">#</a></h1>
+<blockquote>
+<p>Danh sách tự động trích xuất để hỗ trợ tìm kiếm; một số token có thể là prefix hoặc tên minh họa, cần đối chiếu Data Dictionary.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Tên</th>
+<th style="text-align:right">Số lần xuất hiện</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bpms_abc_cus_cost</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>bpms_abc_drv_</code></td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>bpms_pl_cus_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>bpms_pl_pa_cus_mas</code></td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td><code>bpms_pl_prdn_plan</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>cmn_rprtcd_map</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>cmn_trns_his</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gac_accdet_his</code></td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>gac_bspllc_mas</code></td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td><code>gac_ftpdet_his</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gac_slip_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gat_obktrx_log</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gat_trx_log</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdc_ac_mas</code></td>
+<td style="text-align:right">9</td>
+</tr>
+<tr>
+<td><code>gdc_int_mas</code></td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>gdc_intcal_his</code></td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>gdc_maschgdt_his</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gdc_rlytrx_his</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdc_slip_his</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdc_tacrchg_his</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdc_trx_his</code></td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td><code>gdd_lq_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdd_lqinchg_his</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdd_lqln_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdt_dft</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdt_his</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdt_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_com_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_com_acct_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_com_acpl_d</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_com_bsplic_inf</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_com_cus_inf</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_com_cusdep_d</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gdw_crm_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_cus_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_gac_acccdedic_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_gac_accdet_his</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gdw_gac_bspllc_mas</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gdw_gac_slip_his</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_gac_vouic_his</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_alm_est_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_csum_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_cus_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_dmb_gods_dmb</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_ead_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_ead_sum_mas</code></td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_ibs_dmb_link</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gdw_rsk_tot_coa_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gif_billpmnt_trx_log</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gif_cfm_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gla_aprs_mas</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gla_coltr_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gla_dep_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gla_estbllon_inf</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gla_estt_mas</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>gla_psas_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gle_acct_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gle_dsbs</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gle_dsbs_mas</code></td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td><code>gle_dsbstrx_his</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gle_lmt</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gle_lmt_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gle_schd_mas</code></td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td><code>gle_schdpst_his</code></td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td><code>glm_aplct_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>glm_aprv_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>glm_cnsl_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>glm_colestb_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>glm_cucl_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gmm_pst_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gms_dispch_tgt</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gms_dspch_mas</code></td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>gms_umscust_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>grc_actl</code></td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td><code>grc_shdw</code></td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td><code>gre_amd</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gre_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gre_outgoing_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gre_outgoing_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gre_stmt_inf</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>grf_locacd_com</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gsc_pst_inf</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gsm_incoming_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>gso_autotrms_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gso_autotrns_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gso_batfile_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gso_dayftrns_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gtd_is_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>gtd_td_mas</code></td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td><code>pms_abc_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_abc_cost</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_abc_drv_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_abc_drv_acno</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_abc_drv_sb</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_adj_</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>pms_adj_trns</code></td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>pms_coa_code</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_pl_corp_mas</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_pl_crop_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_pl_cus_abc</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_pl_cus_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>pms_pl_evalt_mas</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>pms_pl_evalt_ser_mon</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>pms_pl_pa_</code></td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>pms_pl_pa_cus_mas</code></td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>pms_prdn_</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>pms_valuation_mapping</code></td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td><code>risk_exposure</code></td>
+<td style="text-align:right">2</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section class="tab-panel" data-panel="diagrams"><section class="chapter" id="diagram-gallery"><h1>Thư viện Diagram</h1><p>Chạm vào từng sơ đồ để mở ảnh đầy đủ.</p><div class="diagram-grid"><figure class="diagram-card gallery-item"><a href="assets/diagrams/01_end_to_end_data_workflow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/01_end_to_end_data_workflow.png" alt="Luồng dữ liệu ngân hàng end-to-end"></a><figcaption>1. Luồng dữ liệu ngân hàng end-to-end</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/02_aml_kyc_flow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/02_aml_kyc_flow.png" alt="Luồng KYC và AML"></a><figcaption>2. Luồng KYC và AML</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/03_core_transaction_accounting.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/03_core_transaction_accounting.png" alt="Core transaction đến accounting"></a><figcaption>3. Core transaction đến accounting</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/04_eod_accrual_ftp.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/04_eod_accrual_ftp.png" alt="EOD Accrual và FTP"></a><figcaption>4. EOD Accrual và FTP</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/05_loan_key_chain.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/05_loan_key_chain.png" alt="Chuỗi khóa dữ liệu Loan"></a><figcaption>5. Chuỗi khóa dữ liệu Loan</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/06_reconciliation_flow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/06_reconciliation_flow.png" alt="Luồng reconciliation"></a><figcaption>6. Luồng reconciliation</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/07_dw_layering.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/07_dw_layering.png" alt="Các tầng Data Warehouse"></a><figcaption>7. Các tầng Data Warehouse</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/08_infrastructure_rac.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/08_infrastructure_rac.png" alt="Kiến trúc Application, RAC và DR"></a><figcaption>8. Kiến trúc Application, RAC và DR</figcaption></figure></div></section></section>
+<section class="tab-panel" data-panel="about"><section class="chapter" id="about-content"><h1>Cách sử dụng bộ ROM</h1><section class="chapter prelude"><h1 id="about-bo-rom-data-workflow">Bộ ROM Data Workflow<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#about-bo-rom-data-workflow">#</a></h1>
+<p>Tạo từ file nguồn <code>Data workflow.md</code> (41,627 từ, 2,618 dòng).</p>
+</section><section class="chapter"><h2 id="about-thanh-phan">Thành phần<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#about-thanh-phan">#</a></h2>
+<ul>
+<li><code>Data_Workflow_ROM_Master.md</code>: sổ tay kiến thức tổng hợp.</li>
+<li><code>Data_Workflow_Active_Recall.md</code>: flashcard và câu hỏi tình huống.</li>
+<li><code>diagrams/</code>: sơ đồ SVG chính xác, có thể phóng to.</li>
+</ul>
+</section><section class="chapter"><h2 id="about-cach-dung">Cách dùng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#about-cach-dung">#</a></h2>
+<ol>
+<li>Đọc sơ đồ tổng quan.</li>
+<li>Chọn module đang làm việc.</li>
+<li>Trước xử lý sự cố, dùng ma trận symptom → trace path.</li>
+<li>Ôn flashcard theo chu kỳ 1–3–7–14–30 ngày.</li>
+<li>Với thông tin áp dụng Production, đối chiếu Data Dictionary, policy và source code hiện hành.</li>
+</ol>
+</section><section class="chapter"><h2 id="about-diagram-a-sua">Diagram đã sửa<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#about-diagram-a-sua">#</a></h2>
+<ul>
+<li><code>Diagram_Gallery.html</code>: bản HTML tự chứa, mở trực tiếp không cần Mermaid hoặc file phụ.</li>
+<li><code>diagrams_fixed/</code>: 8 sơ đồ ở cả PNG và SVG.</li>
+<li><code>Data_Workflow_ROM_Master.md</code>: đã dùng ảnh PNG tĩnh; Mermaid source được giữ trong phần thu gọn để chỉnh sửa khi cần.</li>
+</ul>
+</section><h2>Truy cập nhanh</h2><ul><li>Dùng ô tìm kiếm để tìm tên bảng, thuật ngữ, lỗi hoặc công thức.</li><li>Chọn <strong>Active Recall</strong> để tự kiểm tra kiến thức.</li><li>Trên điện thoại, chọn <strong>Add to Home Screen</strong> để dùng như ứng dụng.</li><li>Sau lần truy cập đầu tiên, nội dung có thể đọc offline nhờ Service Worker.</li></ul></section></section>
+</main>
+</div>
+<footer>Data Workflow ROM · Bản website tĩnh, không thu thập dữ liệu và không gửi nội dung ra máy chủ bên thứ ba.</footer>
+</div>
+<script>
+const INDEX=[{"tab": "rom", "id": "rom-data-workflow-rom-kien-thuc-ngan-hang", "title": "DATA WORKFLOW — ROM KIẾN THỨC NGÂN HÀNG", "text": "DATA WORKFLOW — ROM KIẾN THỨC NGÂN HÀNG # Mục tiêu: giúp một Oracle Database Developer hiểu nhanh, truy vết đúng và vận hành an toàn luồng dữ liệu ngân hàng từ Channel → Core → Accounting/EOD → Data Warehouse → PMS/Risk/Reporting. Phạm vi: nội dung được tái cấu trúc từ file Data workflow.md . Các con số, chu kỳ, tên hệ thống và quy tắc nghiệp vụ đặc thù phải được đối chiếu lại với tài liệu chính thức của ngân hàng trước khi áp dụng Production."}, {"tab": "rom", "id": "rom-1-ban-o-toan-canh-trong-60-giay", "title": "1. Bản đồ toàn cảnh trong 60 giây", "text": "1. Bản đồ toàn cảnh trong 60 giây # Toàn bộ tài liệu có thể nén thành 7 tầng dữ liệu : Kênh giao dịch: ATM/POS, Mobile, CMS, Open API, SWIFT. Kiểm soát trước giao dịch: KYC/AML, Watchlist, hạn mức, trạng thái tài khoản. Core nghiệp vụ: Customer, Deposit, Loan, FX/Trade, Treasury. Kế toán giao dịch: Master/History → Slip → Voucher → General Ledger. Chốt sổ cuối ngày: Accrual, FTP, Netting, Reconciliation, EOD Batch. Kho dữ liệu: Basic Mart → Integration Mart → Detailed Mart → KPI/Report Mart. Quản trị: PMS/Profitability, Risk/Basel/ALM, báo cáo quản trị và pháp lý. Luồng nhớ duy nhất # Mermaid source (tùy chọn) Luồng dữ liệu ngân hàng end-to-end — chạm để mở kích thước đầy đủ Câu thần chú: Giao dịch phải có ID để truy vết , dữ liệu phải có grain rõ ràng , kế toán phải DR = CR , batch phải idempotent , mart phải đối soát , báo cáo phải không nhân bản dữ liệu ."}, {"tab": "rom", "id": "rom-2-thong-ke-va-lam-sach-tai-lieu-nguon", "title": "2. Thống kê và làm sạch tài liệu nguồn", "text": "2. Thống kê và làm sạch tài liệu nguồn # Tài liệu nguồn khoảng 43.500 từ , 2.617 dòng , hơn 265 KB . Có 37 khối ROM , trong đó: 2 khối là template/phương pháp học. 2 cặp nội dung gần như trùng: AML và Accounting/Closing. 2 cặp Deposit có nội dung chồng lấn nhưng bản sau chi tiết hơn. Sau khi hợp nhất, kiến thức được tổ chức thành 11 miền nghiệp vụ chính và 9 nguyên lý xuyên suốt . 11 miền nghiệp vụ # # Miền Câu hỏi cốt lõi 1 Customer & AML Khách hàng có được phép giao dịch không? 2 Core Transaction & Accounting Một giao dịch được ghi nhận và hạch toán thế nào? 3 Deposit Tài khoản tiền gửi, số dư và lãi được quản lý ra sao? 4 Loan & Collateral Hạn mức, tài khoản vay, khế ước và tài sản bảo đảm liên kết thế nào? 5 FX, Remittance & Trade Finance Tiền và điện quốc tế được định tuyến, kiểm soát thế nào? 6 Treasury & Reconciliation Ngân hàng quản lý vị thế, deal và Nostro/Vostro thế nào? 7 Channel Giao dịch từ kênh đến Core và quay lại khách hàng thế nào? 8 MIS / Data Warehouse Dữ liệu OLTP được biến thành dữ liệu báo cáo thế nào? 9 PMS / Profitability Lãi thật của khách hàng, tài khoản, sản phẩm, chi nhánh là bao nhiêu? 10 Risk Management EAD, PD, LGD, RWA, ALM được hình thành từ dữ liệu nào? 11 Infrastructure Hệ thống đạt HA, bảo mật và DR thế nào?"}, {"tab": "rom", "id": "rom-3-chin-nguyen-ly-xuyen-suot-phai-thuoc-long", "title": "3. Chín nguyên lý xuyên suốt phải thuộc lòng", "text": "3. Chín nguyên lý xuyên suốt phải thuộc lòng # 3.1 Một giao dịch — một sợi chỉ truy vết # Giao dịch xuyên module cần một Global ID / Glob_id . ID này phải xuất hiện hoặc ánh xạ được qua Channel log, business history, Slip, Voucher và GL. Khi xử lý incident, không bắt đầu bằng “bảng nào có dữ liệu”; hãy bắt đầu bằng ID nào nối được toàn bộ vòng đời . 3.2 Master là trạng thái, History là sự kiện # *_mas : trạng thái hiện tại, thường UPDATE. *_his / *_trx : lịch sử, thường INSERT append-only. Master tối ưu đọc trạng thái hiện tại; History phục vụ audit, movement, time series. Không dùng Master hiện tại để trả lời câu hỏi lịch sử nếu có thay đổi thuộc tính theo thời gian. 3.3 Grain trước, JOIN sau # Trước khi JOIN, phải trả lời: mỗi dòng đại diện cho cái gì? Customer: 1 dòng/khách hàng. Account: 1 dòng/tài khoản. Execution: 1 dòng/khế ước. Transaction: 1 dòng/giao dịch. Snapshot: 1 dòng/thực thể/ngày. Nếu JOIN bảng 1:N rồi SUM thuộc tính phía “1”, số liệu sẽ bị nhân bản. Hãy aggregate phía N về đúng grain trước. 3.4 Kế toán phải cân bằng # Slip mô tả chứng từ/sự kiện. Voucher mô tả bút toán Nợ/Có. Tổng DR phải bằng tổng CR. Inter-office/FTP toàn ngân hàng phải net về 0 theo quy tắc của hệ thống. 3.5 Batch phải idempotent # Rerun cùng business_date + entity_key + process_type không được tạo thêm số liệu. Có khóa tự nhiên hoặc unique constraint chống trùng. Có trạng thái RUNNING/SUCCESS/FAILED. Có checkpoint và reconciliation trước khi publish. Không DELETE/INSERT mù nếu chưa khóa phạm vi dữ liệu. 3.6 Thời gian là một phần của khóa logic # MIS thường là T+1/T-1, không phải real-time. SCD/History phải JOIN theo valid_from <= trx_date < valid_to . Accrual phụ thuộc business date, holiday calendar, day count convention. Cut-off và timezone phải được đưa vào thiết kế, không để ngầm định. 3.7 Trạng thái là cổng kiểm soát # Trước giao dịch cần kiểm tra tối thiểu: Customer/AML status. Account status: normal, dormant, blocked/accident, released. Limit/available balance. Product and channel eligibility. Approval/EDD nếu thuộc trường hợp bắt buộc. 3.8 Reconciliation là điều kiện hoàn tất # Một luồng chưa hoàn thành chỉ vì job “SUCCESS”. Nó chỉ hoàn thành khi: Count khớp. Amount khớp. DR/CR khớp. Source/target khớp theo tolerance. Không có record mồ côi hoặc unmatched ngoài ngưỡng. 3.9 Dependency quan trọng hơn thời gian chạy # Job đích không được chạy vì “đến giờ”; chỉ chạy khi các predecessor đã SUCCESS và reconciliation đạt yêu cầu. Đây là điểm sống còn của EOD, PMS và Risk. PHẦN A — CUSTOMER & AML #"}, {"tab": "rom", "id": "rom-4-customer-kyc-aml", "title": "4. Customer/KYC/AML", "text": "4. Customer/KYC/AML # Mục đích # Xác định đúng khách hàng, đo rủi ro, ngăn giao dịch bị cấm và tạo dữ liệu phục vụ CTR/STR. Luồng nghiệp vụ nén # Mermaid source (tùy chọn) Luồng KYC và AML — chạm để mở kích thước đầy đủ Khóa và dữ liệu trọng tâm # Khóa tích hợp khách hàng theo tài liệu: sh + lcl + corp_c + cusno . Dữ liệu tĩnh: danh tính, địa chỉ, nghề nghiệp, quốc tịch, ownership. Dữ liệu động: risk score, watchlist result, CDD/EDD status, alert/case. Customer Change Info phải kích hoạt đánh giá lại khi thuộc tính rủi ro thay đổi. 80/20 phải nhớ # Watchlist phải diễn ra trước khi hoàn tất giao dịch có kiểm soát. Risk score không phải dữ liệu “tính một lần”; phải tái đánh giá theo chu kỳ/chuyển biến. Customer master và AML data phải cùng một integration key. TMS tạo alert, con người/case workflow quyết định STR; alert không đồng nghĩa với vi phạm. Giá trị chu kỳ 1Y/2Y/3Y, ngưỡng ownership 25% và nhóm bắt buộc EDD trong tài liệu là quy tắc nguồn , cần đối chiếu policy hiện hành trước Production. Điểm rủi ro vận hành # False negative: bỏ sót người bị cấm do sai chính tả, transliteration hoặc dữ liệu thiếu. False positive: chặn nhầm do trùng tên, khiến case backlog tăng mạnh. Stale risk: change data đến chậm nên risk score không còn đúng. Broken identity: nhiều mã khách hàng cho cùng một người hoặc một mã map sang nhiều người. Truy vết nhanh # Kiểm tra customer integration key. Kiểm tra dữ liệu nguồn và thời điểm cập nhật. Kiểm tra phiên bản danh sách watchlist. Kiểm tra score/rule version. Kiểm tra approval/case status và audit log. PHẦN B — CORE TRANSACTION, ACCOUNTING & EOD #"}, {"tab": "rom", "id": "rom-5-vong-oi-mot-giao-dich-core", "title": "5. Vòng đời một giao dịch Core", "text": "5. Vòng đời một giao dịch Core # Luồng chuẩn # Mermaid source (tùy chọn) Core transaction đến accounting — chạm để mở kích thước đầy đủ Ý nghĩa từng lớp # Business transaction: cập nhật tài khoản nghiệp vụ và history trong phạm vi ACID phù hợp. Slip: chứng từ gốc mô tả sự kiện giao dịch. Voucher: bút toán kế toán được sinh từ Slip. GL: số dư tổng hợp theo ngày, chi nhánh, COA, currency. Các bảng được nhắc nhiều trong tài liệu # Slip: gdw_gac_slip_his , gac_slip_mas , gdc_slip_his . Voucher: gdw_gac_vouic_his . GL: gdw_gac_bspllc_mas , gdw_com_bsplic_inf , gac_bspllc_mas . Mapping COA: gdw_gac_acccdedic_mas . Composite key quan trọng của GL # standard_date + management_branch + COA + currency Có thể còn chiều khác tùy thiết kế, nhưng bốn chiều này là trục aggregate cốt lõi trong tài liệu. Incident kinh điển: App báo thành công nhưng GL thiếu # Theo Glob_id , kiểm tra tuần tự: Channel log có request/response không? Master đã UPDATE chưa? History đã INSERT chưa? Slip đã sinh chưa? Background process đã consume Slip chưa? Voucher có đủ DR/CR không? Local GL đã post chưa? HQ GL đã nhận chưa? Không sửa GL trực tiếp trước khi xác định đúng điểm gãy."}, {"tab": "rom", "id": "rom-6-eod-accrual-ftp-netting", "title": "6. EOD: Accrual, FTP, Netting", "text": "6. EOD: Accrual, FTP, Netting # Luồng nén # Mermaid source (tùy chọn) EOD Accrual và FTP — chạm để mở kích thước đầy đủ Công thức/định luật cần nhớ # FTP theo tài liệu: average balance × FTP rate × day/365 . Tiền tệ dùng NUMBER/DECIMAL , không dùng FLOAT. SUM phải xử lý NULL bằng NVL/COALESCE . Netting giúp giảm hàng triệu update xuống vài nghìn posting tổng hợp. Tổng Inter-office phải cân bằng theo invariant của hệ thống. Rủi ro chính # EOD chạy cùng giao dịch realtime gây row lock/contention. Holiday/leap year/day-count sai làm sai accrual. Bảng history không partition khiến full scan kéo dài. Rerun không idempotent làm nhân đôi accrual/FTP. Job post GL chạy trước job tính detail hoàn tất. Mẫu kiểm tra cân đối Oracle # select business_date,\n       sum(nvl(dr_amount, 0)) total_dr,\n       sum(nvl(cr_amount, 0)) total_cr,\n       sum(nvl(dr_amount, 0)) - sum(nvl(cr_amount, 0)) diff\nfrom   daily_voucher\nwhere  business_date = :p_business_date\ngroup  by business_date\nhaving abs(sum(nvl(dr_amount, 0)) - sum(nvl(cr_amount, 0))) > :p_tolerance; PHẦN C — DEPOSIT #"}, {"tab": "rom", "id": "rom-7-deposit-business-data-model", "title": "7. Deposit Business & Data Model", "text": "7. Deposit Business & Data Model # Vòng đời tài khoản # Chọn sản phẩm: Demand / Time / Installment. Mở tài khoản và sinh ID. Giao dịch nộp/rút/chuyển. Tính lãi dồn tích hàng ngày. Settlement/renewal/maturity. Thay đổi trạng thái: normal, dormant, accident/blocked, released. Hai số tài khoản phải phân biệt # DEP_ACNO: surrogate key hệ thống, ổn định, dùng liên kết bảng. LCL_ACNO: số hiển thị cho khách hàng, có thể thay đổi/mapping. Đây là thiết kế giúp đổi số hiển thị mà không cập nhật hàng triệu dòng history. Cấu trúc bảng lõi # gdc_ac_mas : account master chung. gtd_td_mas : term deposit sub-master. gdd_lq_mas : demand/liquidity related master theo tài liệu. gdc_trx_his : transaction history. gdc_int_mas : interest master. gdc_intcal_his : interest calculation history. gdc_maschgdt_his : audit thay đổi master. gdc_rlytrx_his : linked transaction history. Nhóm gso_* : auto transfer/rollover/day-future transaction. Công thức số dư trong tài liệu # DEP AC BLC = PABL BLC + PMT RSTRT AMT Hiểu theo nghiệp vụ: Ledger/account balance = available/payable balance + restricted/held amount. Khi cho phép rút tiền, ưu tiên kiểm tra available/payable balance , không chỉ ledger balance. Quy tắc PK History # DEP_ACNO + DEP_TRX_HIS_NO hoặc DEP_ACNO + *_SER_NO . Serial phải duy nhất trong phạm vi tài khoản; sequence generation phải chịu được concurrency. Rủi ro vận hành # Kênh mới quên kiểm tra dormant/blocked status. gdc_trx_his phình nhanh, không partition/pruning. Tài khoản thu hộ có hotspot row lock trên master balance. Accrual/renewal dùng sai rate version hoặc business date. Mid-term release tính sai lãi không kỳ hạn. Truy vết lãi sai # Xác định DEP_ACNO , product, term, status. Kiểm tra rate history/effective date. Kiểm tra daily balance và cut-off. Kiểm tra gdc_intcal_his từng ngày. Kiểm tra settlement/rollover job và rerun. Đối chiếu GL interest posting. PHẦN D — LOAN & COLLATERAL #"}, {"tab": "rom", "id": "rom-8-loan-lifecycle", "title": "8. Loan lifecycle", "text": "8. Loan lifecycle # Cây tín dụng ba cấp # Mermaid source (tùy chọn) Chuỗi khóa dữ liệu Loan — chạm để mở kích thước đầy đủ Chuỗi khóa quan trọng: brw_aplct_no → lon_imt_no → lon_acno → exe_no Một hạn mức có nhiều tài khoản; một tài khoản có nhiều lần giải ngân; một lần giải ngân có nhiều kỳ trả nợ. Luồng nghiệp vụ # Consultation/Application. Credit appraisal & approval. Create credit line. Create loan account. Disbursement/Execution. Generate schedule. Daily accrual and repayment. Past-due/Early warning/Charge-off. Bảng trọng tâm theo tài liệu # Application/approval: glm_cnsl_mas , glm_aplct_mas , glm_aprv_mas . Credit line/account: gle_lmt_mas , gle_acct_mas . Disbursement: gle_dsbs_mas , gle_dsbstrx_his . Schedule/overdue: gle_schd_mas , gle_schdpst_his . Appraisal/collateral: gla_aprs_mas , gla_estt_mas , gla_estbllon_inf , gla_coltr_inf . Repayment patterns # Maturity/bullet: gốc cuối kỳ. Fixed principal: gốc đều, lãi giảm. Annuity: tổng gốc+lãi tương đối cố định. Schedule là nguồn sự thật để xác định due/past due; không suy luận nợ quá hạn chỉ từ current balance."}, {"tab": "rom", "id": "rom-9-collateral-architecture", "title": "9. Collateral architecture", "text": "9. Collateral architecture # Tài sản bảo đảm nên là module tách biệt vì: Một collateral có thể bảo đảm nhiều facility/execution. Một loan có thể dùng nhiều collateral. Từng loại tài sản có thuộc tính riêng: real estate, vehicle, deposit, securities. Cần appraisal version, haircut, eligible value và allocation ratio. Kiểm soát quan trọng # Tổng allocated collateral value không vượt eligible value. Không dùng appraisal hết hạn. Release collateral chỉ khi nghĩa vụ liên quan đã được giải phóng. Collateral-to-loan link phải có hiệu lực theo thời gian. Incident nợ quá hạn không xuất hiện # Kiểm tra gle_schd_mas có due item chưa. Kiểm tra repayment/autodebit thực tế. Kiểm tra business date/holiday treatment. Kiểm tra job tạo gle_schdpst_his . Kiểm tra account/execution status. Kiểm tra ETL sang CIC/Risk có lấy đúng base date không. PHẦN E — FX, REMITTANCE & TRADE FINANCE #"}, {"tab": "rom", "id": "rom-10-fx-remittance", "title": "10. FX & Remittance", "text": "10. FX & Remittance # Luồng Outward # Applicant → Remitting Bank → Settle/Correspondent Bank → Paying Bank → Beneficiary. Luồng điện # Core → message generation → sanctions/watchlist → approval nếu caught → BIC/routing validation → SWIFT Alliance → receiving bank. Điểm nhớ # Buying/Selling luôn nhìn từ góc độ ngân hàng. Settle Bank/Nostro là cầu thanh toán khi hai ngân hàng không có quan hệ trực tiếp. BIC/SWIFT code là routing key. MT103 thường gắn customer transfer; MT202 thường gắn bank-to-bank settlement theo ngữ cảnh nguồn. Mỗi message cần unique reference và idempotency để retry không gửi hai lần. Bảng được nhắc # Outgoing remittance: gre_outgoing_mas . Incoming message/remittance: gsm_incoming_mas . Nhóm gre_mas , gre_amd , gre_stmt_inf phục vụ remittance/trade message theo tài liệu. Rủi ro # Safe Watch/AML false positive làm điện stuck. Tỷ giá stale gây arbitrage/loss. Sai BIC/account làm tiền treo. Timeout nhưng message đã gửi gây duplicate transfer khi retry."}, {"tab": "rom", "id": "rom-11-trade-finance", "title": "11. Trade Finance", "text": "11. Trade Finance # Vòng đời L/C nén # Application → Issuance → SWIFT MT7xx → Amendment → Shipment/Documents → Document checking → Acceptance/Payment → Closure. Phương thức thanh toán # T/T: chuyển tiền điện. D/P: documents against payment. D/A: documents against acceptance. L/C: ngân hàng cam kết thanh toán theo điều kiện chứng từ. Kiểm soát dữ liệu # Version hóa amendment; không overwrite điều khoản cũ. Liên kết message reference với L/C reference và transaction reference. Theo dõi outstanding amount, utilization, commission và contingent liability. Sanctions screening phải áp dụng cho parties, banks, vessels/ports/goods khi policy yêu cầu. PHẦN F — TREASURY & RECONCILIATION #"}, {"tab": "rom", "id": "rom-12-treasury", "title": "12. Treasury", "text": "12. Treasury # Phạm vi # Money Market. FX spot/forward/swap. Securities. Derivatives. Position, settlement, valuation, accounting. Luồng deal # Trade capture → confirmation → settlement instruction → cash/securities settlement → position update → valuation/M2M → accounting → reconciliation. Rủi ro cốt lõi # Market price/feed sai làm P&L/M2M sai. Deal amendment không version hóa. Settlement date/currency mismatch. Position không khớp giữa front office, back office và GL."}, {"tab": "rom", "id": "rom-13-nostro-vostro-reconciliation", "title": "13. Nostro/Vostro Reconciliation", "text": "13. Nostro/Vostro Reconciliation # Hai tập dữ liệu # Shadow/Expected: hệ thống dự kiến ngân hàng đại lý sẽ ghi nhận. Actual: sao kê/thông tin thực tế từ ngân hàng đại lý. Luồng matching # Mermaid source (tùy chọn) Luồng reconciliation — chạm để mở kích thước đầy đủ Matching key thường dùng # Value date, currency, amount, reference, counterparty, direction. Không nên match chỉ bằng amount. Bảng trọng tâm theo tài liệu # grc_shdw : shadow. grc_actl : actual. gsc_pst_inf , gmm_pst_inf : position/posting information theo module nguồn. KPI vận hành # Unmatched count/amount. Aging của exception. Duplicate statement line. Auto-match rate. Adjustment count sau cut-off. PHẦN G — CHANNEL #"}, {"tab": "rom", "id": "rom-14-channel-architecture", "title": "14. Channel Architecture", "text": "14. Channel Architecture # Luồng tổng quát # Client/ATM/POS/API → Gateway/Switch → Channel service → Core/Tmax → External network nếu có → response → UMS notification. Miền dữ liệu # ATM/POS transaction log. Domestic transfer/Clearing/RTGS. CMS/CFM/Bill payment. UMS SMS/email/push queue. Open API authentication, request/response, callback. Bảng/khóa được nhắc # ATM logs: gat_trx_log , gat_obktrx_log . UMS: gms_dspch_mas , gms_umscust_mas , gms_dispch_tgt . Batch/file: gso_batfile_mas . Bill payment/CFM: gif_billpmnt_trx_log , nhóm gif_cfm_* . ATM trace key: atm_trx_trace_no . Ba trạng thái timeout phải phân biệt # Request chưa đến Core. Core xử lý fail/rollback. Core commit thành công nhưng response mất trên đường về. Trường hợp 3 là nguyên nhân điển hình của duplicate retry. Vì vậy mỗi request phải có idempotency key và cơ chế query status. Notification không phải giao dịch # SMS/email fail không đồng nghĩa giao dịch fail. UMS là luồng bất đồng bộ; cần tách transaction status và notification status. PHẦN H — MIS / DATA WAREHOUSE #"}, {"tab": "rom", "id": "rom-15-kien-truc-nhieu-tang", "title": "15. Kiến trúc nhiều tầng", "text": "15. Kiến trúc nhiều tầng # Mermaid source (tùy chọn) Các tầng Data Warehouse — chạm để mở kích thước đầy đủ Ý nghĩa # 0th: raw/basic snapshot từ Core/Channel. 1st: chuẩn hóa, tích hợp customer/account/product. 2nd: fact/dimension, history, mart nghiệp vụ. 3rd: KPI, profitability, risk aggregates. 4th: dashboard/file/report. T+1 và đối soát # Tài liệu nhấn mạnh “previous day”. Vì vậy: Không dùng MIS để xác nhận giao dịch real-time. Chỉ publish mart sau khi Core EOD hoàn tất. Mỗi tầng cần count/amount reconciliation. Master/Slave và SCD # Master/current dimension không đủ cho báo cáo lịch sử. Với SCD Type 2, JOIN theo ngày hiệu lực: select t.trx_id,\n       t.trx_date,\n       c.branch_code\nfrom   fact_transaction t\njoin   dim_customer_scd c\n  on   c.customer_no = t.customer_no\n and   t.trx_date >= c.valid_from\n and   t.trx_date <  nvl(c.valid_to, date '9999-12-31'); Cạm bẫy fan-out # Sai: select c.customer_no, sum(c.reported_asset)\nfrom customer c\njoin deposit_account a on a.customer_no = c.customer_no\ngroup by c.customer_no; Đúng: aggregate phía account về customer trước khi JOIN. with a as (\n    select customer_no, sum(balance) total_balance\n    from deposit_account\n    group by customer_no\n)\nselect c.customer_no, c.reported_asset, a.total_balance\nfrom customer c\nleft join a on a.customer_no = c.customer_no; Bảng/prefix được nhắc # gdw_com_cus_inf , gdw_com_acct_inf . gdw_com_cusdep_d , gdw_com_acpl_d . gdw_rsk_* : risk mart. pms_* : profitability mart. Rủi ro # ETL chạy trước source cut-off. Join sai grain làm phồng số tiền. SCD join thiếu thời gian. Query report chọc thẳng OLTP. Late arriving data không có cơ chế restatement. PHẦN I — PMS / PROFITABILITY #"}, {"tab": "rom", "id": "rom-16-cong-thuc-loi-nhuan-quan-tri", "title": "16. Công thức lợi nhuận quản trị", "text": "16. Công thức lợi nhuận quản trị # Theo tài liệu: Net Profit\n= Interest Income\n+ Non-interest Income\n+ FTP Revenue\n- Interest Expense\n- FTP Cost\n- Cost of Work / ABC Cost\n- Credit Cost Luồng dữ liệu # GL/transaction → COA mapping → interest/non-interest income → FTP → ABC allocation → credit cost → customer/account profitability → roll-up branch/product/group. Các lớp bảng # Mapping/common: CMN_* , valuation/COA mapping. Account/customer profit: pms_pl_evalt_mas , pms_pl_cus_mas . ABC driver: PMS_ABC_DRV_* . Profitability analysis: PMS_PL_PA_* , bpms_pl_pa_cus_mas . Adjustment: PMS_ADJ_* , đặc biệt pms_adj_trns . Time series: pms_pl_evalt_ser_mon . ABC Costing # Chi phí → Activity → Driver quantity/ratio → Account/Customer/Branch. Ví dụ driver: số giao dịch, thời gian xử lý, số tài khoản, số lần in sao kê. Khi denominator = 0, chi phí phải vào bucket “unallocated”, không được divide-by-zero hoặc biến mất. Invariant bắt buộc # Tổng profit phân bổ tại các dimension phải reconcile với GL/P&L sau các adjustment hợp lệ và tolerance làm tròn. Rủi ro # COA mới chưa mapping làm doanh thu “rơi khỏi” PMS. Job tổng hợp chạy khi ABC/Credit Cost chưa xong làm profit ảo cao. Driver sai làm phân bổ chi phí méo. Adjustment overwrite system result thay vì lưu riêng. Profit sharing ratio không bằng 100% gây double counting. Thiết kế adjustment an toàn # Không update trực tiếp kết quả hệ thống. Lưu adjustment riêng: select p.entity_id,\n       p.system_profit,\n       nvl(a.adjusted_amount, 0) adjusted_amount,\n       p.system_profit + nvl(a.adjusted_amount, 0) final_profit\nfrom   pms_profit p\nleft join (\n    select entity_id, sum(adjusted_amount) adjusted_amount\n    from pms_adjustment\n    where approval_status = 'APPROVED'\n    group by entity_id\n) a on a.entity_id = p.entity_id; PHẦN J — RISK MANAGEMENT #"}, {"tab": "rom", "id": "rom-17-risk-basics", "title": "17. Risk Basics", "text": "17. Risk Basics # Bộ ba tín dụng # PD: Probability of Default. LGD: Loss Given Default. EAD: Exposure at Default. Công thức ghi nhớ: Expected Loss = PD × LGD × EAD RWA/BIS # RWA biến exposure thành tài sản có trọng số rủi ro. Capital adequacy/BIS ratio so sánh vốn đủ điều kiện với RWA theo framework áp dụng. ALM/Liquidity # Time bucket dòng tiền. LCR: khả năng chịu stress thanh khoản ngắn hạn. NSFR: nguồn vốn ổn định dài hạn. Phải đồng bộ maturity, repricing date, currency và behavioral assumptions. Luồng dữ liệu Risk # Core Loan/Deposit/Trade/Treasury → EAD base → collateral/guarantee → customer/group aggregation → engines TE/RWA/ALM/Market Risk → risk mart/report. Bảng được nhắc # gdw_rsk_ead_mas , gdw_rsk_ead_sum_mas . gdw_rsk_cus_inf , gdw_rsk_csum_mas . gdw_rsk_ibs_dmb_link . gdw_rsk_alm_est_mas . gdw_rsk_tot_coa_inf . Rủi ro dữ liệu # Chỉ lấy on-balance, bỏ off-balance commitment/guarantee. Collateral mapping thiếu hoặc double allocation. PD/LGD model version không khớp base date. ALM time bucket sai do maturity/repricing date. Currency conversion dùng rate không cùng cut-off. Checklist khi EAD/RWA bất thường # Base date và population. On/off balance completeness. CCF/guarantee/collateral logic. Customer/group mapping. Model/risk weight version. FX rate. Aggregation grain và reconciliation về source. PHẦN K — INFRASTRUCTURE #"}, {"tab": "rom", "id": "rom-18-core-banking-infrastructure", "title": "18. Core Banking Infrastructure", "text": "18. Core Banking Infrastructure # Mô hình # Mermaid source (tùy chọn) Kiến trúc Application, RAC và DR — chạm để mở kích thước đầy đủ Vai trò # DMZ giảm blast radius khi web bị compromise. L4 phân phối tải/failover AP. AP Active-Active chia tải. Tmax/TP monitor quản lý transaction, session, connection pool. RAC cung cấp multi-instance HA trên shared database. DR bảo vệ trước site disaster; DR không thay thế backup. Rủi ro # RAC split-brain/interconnect latency. Service placement sai, hot instance. L4 health check chỉ kiểm tra port, không kiểm tra business readiness. Connection pool cạn do DB chậm/lock/leak. DR lag hoặc failover runbook chưa được test. Quan sát theo lớp # Network: latency, packet loss, firewall. L4: active connections, health checks, distribution. AP/Tmax: queue, thread/process, pool usage, error rate. DB: sessions, blocking, wait events, CPU/I/O, ASM/storage. Batch: scheduler, dependency, elapsed time. DR: transport/apply lag, recoverability. PHẦN L — PLAYBOOK XỬ LÝ SỰ CỐ #"}, {"tab": "rom", "id": "rom-19-ma-tran-trieu-chung-uong-kiem-tra", "title": "19. Ma trận triệu chứng → đường kiểm tra", "text": "19. Ma trận triệu chứng → đường kiểm tra # Triệu chứng Điểm bắt đầu Chuỗi kiểm tra App thành công, GL thiếu Glob_id Channel → Master/History → Slip → Voucher → GL EOD chạy quá lâu Job/run ID Dependency → blocking → SQL plan → partition pruning → TEMP/I/O Accrual bị nhân đôi business_date/entity Unique key → rerun log → delete scope → posting reconciliation Deposit interest sai DEP_ACNO Rate history → daily balance → intcal → settlement → GL Nợ quá hạn chưa lên lon_acno/exe_no Schedule → payment → past-due job → history → mart/report ATM timeout/khách bị trừ tiền trace no/idempotency key Channel log → Core commit → switch response → reversal/retry SWIFT stuck message reference Screening → approval → BIC → Alliance status → correspondent Báo cáo bị phồng report grain Join cardinality → pre-aggregation → SCD join → duplicate key MIS lệch Core base date Source EOD → extract count/amount → rejects → transformations → mart PMS lệch GL COA/base month Mapping → dependencies → ABC/Credit Cost → adjustment → rounding EAD/RWA tăng đột biến base date/model version Population → off-balance → collateral → FX → risk weight → aggregation Toàn hệ thống chậm service/time window L4/AP queue → pool → DB sessions/waits → blocking → I/O/ASM"}, {"tab": "rom", "id": "rom-20-bo-cau-hoi-phai-hoi-truoc-khi-sua-du-lieu", "title": "20. Bộ câu hỏi phải hỏi trước khi sửa dữ liệu", "text": "20. Bộ câu hỏi phải hỏi trước khi sửa dữ liệu # Business date nào? Grain của record là gì? ID truy vết xuyên luồng là gì? Source of truth nằm ở bảng nào? Dữ liệu là trạng thái hiện tại hay history? Có job bất đồng bộ nào chưa hoàn tất không? Có thể rerun an toàn không? Reconciliation invariant là gì? Sửa một dòng sẽ ảnh hưởng bảng downstream nào? Rollback và audit evidence là gì? PHẦN M — MẪU SQL AN TOÀN CHO ORACLE #"}, {"tab": "rom", "id": "rom-21-kiem-tra-duplicate-theo-natural-key", "title": "21. Kiểm tra duplicate theo natural key", "text": "21. Kiểm tra duplicate theo natural key # select business_date, entity_id, process_type, count(*) cnt\nfrom   target_table\nwhere  business_date = :p_business_date\ngroup  by business_date, entity_id, process_type\nhaving count(*) > 1;"}, {"tab": "rom", "id": "rom-22-merge-idempotent", "title": "22. MERGE idempotent", "text": "22. MERGE idempotent # merge into target_table t\nusing (\n    select :p_business_date business_date,\n           s.entity_id,\n           s.amount\n    from   source_table s\n    where  s.business_date = :p_business_date\n) s\non (    t.business_date = s.business_date\n    and t.entity_id     = s.entity_id )\nwhen matched then update\n    set t.amount        = s.amount,\n        t.updated_at    = systimestamp\nwhen not matched then insert\n    (business_date, entity_id, amount, created_at)\nvalues\n    (s.business_date, s.entity_id, s.amount, systimestamp);"}, {"tab": "rom", "id": "rom-23-pre-aggregate-truoc-join", "title": "23. Pre-aggregate trước JOIN", "text": "23. Pre-aggregate trước JOIN # with trx as (\n    select account_no,\n           sum(amount) total_amount\n    from   transaction_history\n    where  trx_date >= :p_from_date\n    and    trx_date <  :p_to_date + 1\n    group  by account_no\n)\nselect a.account_no,\n       a.current_balance,\n       nvl(t.total_amount, 0) total_amount\nfrom   account_master a\nleft join trx t on t.account_no = a.account_no;"}, {"tab": "rom", "id": "rom-24-detect-orphan-record", "title": "24. Detect orphan record", "text": "24. Detect orphan record # select h.*\nfrom   account_history h\nwhere  not exists (\n    select 1\n    from account_master m\n    where m.account_no = h.account_no\n);"}, {"tab": "rom", "id": "rom-25-reconciliation-source-target", "title": "25. Reconciliation source/target", "text": "25. Reconciliation source/target # with src as (\n    select count(*) cnt, sum(nvl(amount,0)) amt\n    from source_table\n    where business_date = :p_business_date\n), tgt as (\n    select count(*) cnt, sum(nvl(amount,0)) amt\n    from target_table\n    where business_date = :p_business_date\n)\nselect src.cnt src_cnt,\n       tgt.cnt tgt_cnt,\n       src.amt src_amt,\n       tgt.amt tgt_amt,\n       src.cnt - tgt.cnt cnt_diff,\n       src.amt - tgt.amt amt_diff\nfrom src cross join tgt; PHẦN N — CÁCH HỌC VÀ HỒI KIẾN THỨC #"}, {"tab": "rom", "id": "rom-26-thu-tu-hoc-toi-uu", "title": "26. Thứ tự học tối ưu", "text": "26. Thứ tự học tối ưu # Transaction → Master/History → Slip/Voucher/GL. Deposit và Loan key chain. EOD/Accrual/FTP/Netting. Channel và International Payment. DW/MIS: grain, SCD, anti-duplication. PMS và Risk. Infrastructure và incident tracing."}, {"tab": "rom", "id": "rom-27-phuong-phap-5-phut", "title": "27. Phương pháp 5 phút", "text": "27. Phương pháp 5 phút # Mỗi module tự trả lời năm câu: Input là gì? ID/PK xuyên suốt là gì? Bảng Master và History nào? Job bất đồng bộ/EOD nào? Invariant/reconciliation nào chứng minh kết quả đúng?"}, {"tab": "rom", "id": "rom-28-moc-tri-nho", "title": "28. Móc trí nhớ", "text": "28. Móc trí nhớ # AML: “Biết người → lọc người → chấm người → giám sát giao dịch”. Accounting: “Sự kiện thành Slip, kế toán thành Voucher, số dư vào GL”. Deposit: “DEP_ACNO là gốc; số hiển thị chỉ là mặt tiền”. Loan: “Line che Account, Account chứa Execution, Execution sinh Schedule”. Channel: “Timeout không nói được commit hay chưa”. DW: “Gom N trước khi gặp 1; JOIN lịch sử phải kèm ngày”. PMS: “Thu nhập + FTP − chi phí − rủi ro”. Risk: “PD × LGD × EAD; đừng quên ngoại bảng”. Infra: “Theo dõi từ L4 → AP/Pool → DB Wait → Storage”."}, {"tab": "rom", "id": "rom-29-ranh-gioi-giua-du-kien-va-suy-luan", "title": "29. Ranh giới giữa dữ kiện và suy luận", "text": "29. Ranh giới giữa dữ kiện và suy luận # Khi trả lời câu hỏi dựa trên bộ ROM này, nên phân loại: [SOURCE] : nội dung được nêu trực tiếp trong file. [INFERENCE] : suy luận kiến trúc/kỹ thuật hợp lý từ nội dung. [VERIFY] : thông tin cần đối chiếu policy, data dictionary, source code hoặc Production log. Điều này đặc biệt quan trọng với threshold AML, cut-off, tên bảng, status code, công thức lãi và quy định pháp lý."}, {"tab": "recall", "id": "recall-data-workflow-active-recall-cau-hoi-hoc-bua", "title": "DATA WORKFLOW — ACTIVE RECALL & CÂU HỎI HÓC BÚA", "text": "DATA WORKFLOW — ACTIVE RECALL & CÂU HỎI HÓC BÚA # Không đọc đáp án ngay. Trả lời bằng miệng hoặc viết sơ đồ trước, sau đó mới kiểm tra."}, {"tab": "recall", "id": "recall-a-66-flashcards", "title": "A. 66 Flashcards", "text": "A. 66 Flashcards # Customer & AML # Q: Luồng KYC/AML tối giản? A: CDD/KYC → Watchlist → Risk Assessment → EDD nếu cần → Transaction Monitoring → Case/CTR/STR. Q: Integration key khách hàng trong tài liệu? A: sh + lcl + corp_c + cusno . Q: Vì sao Customer Change Info quan trọng? A: Thay đổi nghề nghiệp, quốc tịch, địa chỉ, ownership có thể làm thay đổi risk score và kích hoạt re-assessment. Q: False positive khác false negative thế nào? A: False positive chặn nhầm; false negative bỏ sót đối tượng rủi ro. Q: Alert TMS có đồng nghĩa STR không? A: Không. Alert cần điều tra/case decision. Q: Trước khi áp dụng ngưỡng AML trong file cần làm gì? A: Đối chiếu policy và quy định hiện hành. Transaction & Accounting # Q: Glob_id dùng làm gì? A: Truy vết cùng một giao dịch qua Channel, module nghiệp vụ, Slip, Voucher và GL. Q: Master và History khác nhau? A: Master giữ trạng thái hiện tại; History giữ sự kiện biến động append-only. Q: Slip khác Voucher? A: Slip là chứng từ/sự kiện gốc; Voucher là bút toán DR/CR. Q: Vì sao hạch toán GL thường bất đồng bộ? A: Giảm latency giao dịch realtime và tách tải accounting. Q: Bốn chiều composite key GL trong tài liệu? A: Standard date, branch, COA, currency. Q: App thành công nhưng GL thiếu kiểm tra gì đầu tiên? A: Glob_id và chuỗi Master/History → Slip → Voucher → GL. EOD/FTP # Q: Công thức FTP cơ bản trong file? A: Average balance × FTP rate × day/365. Q: Tại sao cần Summary Posting? A: Giảm hàng triệu DML vào GL xuống posting tổng hợp theo COA/branch/currency. Q: Invariant Inter-office? A: Tổng net toàn hệ thống phải cân bằng theo thiết kế. Q: Tại sao rerun EOD nguy hiểm? A: Có thể nhân đôi accrual/posting nếu không idempotent. Q: Hai lỗi ngày tháng phổ biến? A: Năm nhuận/day-count và holiday/business-date treatment. Q: Kiểu dữ liệu tiền tệ? A: NUMBER/DECIMAL, không FLOAT. Deposit # Q: DEP_ACNO khác LCL_ACNO? A: DEP_ACNO là surrogate key ổn định; LCL_ACNO là số hiển thị/mapping. Q: Bảng account master chung? A: gdc_ac_mas . Q: Bảng transaction history chính? A: gdc_trx_his . Q: Bảng audit thay đổi master? A: gdc_maschgdt_his . Q: Công thức balance trong tài liệu? A: DEP AC BLC = PABL BLC + PMT RSTRT AMT. Q: Khi cho rút tiền kiểm tra số dư nào? A: Available/payable balance, không chỉ ledger balance. Q: PK History thường thế nào? A: DEP_ACNO + history/serial number. Q: Hai rủi ro lớn của gdc_trx_his ? A: Tăng trưởng dữ liệu và I/O/partition pruning. Loan & Collateral # Q: Cây tín dụng ba cấp? A: Credit Line → Loan Account → Execution. Q: Chuỗi key từ application đến execution? A: brw_aplct_no → lon_imt_no → lon_acno → exe_no. Q: Bảng schedule? A: gle_schd_mas . Q: Bảng overdue history? A: gle_schdpst_his . Q: Vì sao collateral tách module? A: Quan hệ many-to-many, nhiều loại tài sản, appraisal/version/allocation riêng. Q: Fixed principal khác annuity? A: Fixed principal gốc đều; annuity tổng kỳ trả tương đối cố định. Q: Nợ quá hạn nên dựa trên gì? A: Schedule + actual payment + business date, không chỉ current balance. FX/Trade/Treasury # Q: Buying/Selling nhìn từ góc nào? A: Góc nhìn ngân hàng. Q: Settle Bank làm gì? A: Trung gian thanh toán qua quan hệ Nostro/Vostro. Q: BIC dùng để làm gì? A: Định tuyến ngân hàng/chi nhánh trên SWIFT. Q: Timeout SWIFT nguy hiểm gì? A: Message có thể đã gửi nhưng response mất; retry có thể duplicate. Q: D/P khác D/A? A: D/P giao chứng từ khi thanh toán; D/A giao khi chấp nhận hối phiếu. Q: Treasury deal flow? A: Capture → confirmation → settlement → position → valuation → accounting → reconciliation. Q: M2M phụ thuộc dữ liệu gì? A: Market price/rate feed đúng thời điểm và đúng instrument. Reconciliation & Channel # Q: Shadow và Actual? A: Shadow là dự kiến nội bộ; Actual là sao kê/thực tế từ correspondent. Q: Vì sao không match chỉ bằng amount? A: Nhiều giao dịch cùng số tiền; cần value date/currency/reference/direction. Q: ATM trace key trong tài liệu? A: atm_trx_trace_no . Q: UMS queue table? A: gms_dspch_mas . Q: SMS fail có nghĩa giao dịch fail không? A: Không; notification là luồng bất đồng bộ riêng. Q: Ba khả năng khi timeout? A: Chưa tới Core; rollback; đã commit nhưng mất response. MIS/DW # Q: Các tầng mart? A: Basic → Integration → Detailed → KPI/Management → Report. Q: MIS trong tài liệu chủ yếu real-time hay T+1? A: T+1/previous day. Q: Luật chống fan-out? A: Aggregate phía N về đúng grain trước khi JOIN phía 1. Q: SCD Type 2 JOIN thêm điều kiện gì? A: Ngày giao dịch nằm trong khoảng hiệu lực dimension. Q: Tại sao không query report trực tiếp Core? A: Ảnh hưởng OLTP, lock/I/O và không đảm bảo snapshot nhất quán. Q: Job ETL success đã đủ chưa? A: Chưa; phải reconciliation count/amount/source-target. PMS # Q: Công thức Net Profit nén? A: Income + FTP revenue − expenses − FTP cost − ABC cost − credit cost. Q: FTP giúp đánh giá chi nhánh thế nào? A: Tách hiệu quả huy động và cho vay qua giá vốn nội bộ. Q: Cost driver là gì? A: Tiêu chí/trọng số phân bổ chi phí hoạt động. Q: Prefix output profitability? A: PMS_PL_PA_* / bpms_pl_pa_* . Q: Unmapped COA gây gì? A: Doanh thu/chi phí bị bỏ khỏi PMS, làm lệch GL. Q: Adjustment nên lưu thế nào? A: Bảng riêng, có approval/audit, cộng vào system result khi report. Risk & Infrastructure # Q: Expected Loss formula? A: PD × LGD × EAD. Q: Lỗi EAD phổ biến? A: Bỏ quên off-balance commitments/guarantees. Q: ALM phụ thuộc các ngày nào? A: Maturity, repricing, behavioral date/time bucket. Q: RAC mang lại gì? A: Nhiều instance truy cập shared database để HA/scale service. Q: Split-brain là gì? A: Các node mất liên lạc và cùng nghĩ node kia chết, gây nguy cơ xung đột. Q: Connection pool cạn thường là nguyên nhân hay triệu chứng? A: Thường là triệu chứng của DB chậm, lock, leak hoặc tải tăng. Q: DR có thay backup không? A: Không; DR có thể replicate cả lỗi logic/ransomware/corruption. Q: Trình tự quan sát hệ thống chậm? A: L4 → AP/Tmax queue/pool → DB sessions/waits/locks → storage/ASM."}, {"tab": "recall", "id": "recall-b-24-cau-hoi-hoc-bua-co-ap-an", "title": "B. 24 câu hỏi hóc búa có đáp án", "text": "B. 24 câu hỏi hóc búa có đáp án # 1. App trả SUCCESS, tài khoản khách đã tăng nhưng GL không đổi. Có nên UPDATE GL bằng tay? # Đáp án: Chưa. Truy theo Glob_id để xác định Master/History, Slip, Voucher và background consumer. Nếu sửa GL trước, có thể job retry post lần nữa gây double posting. Chỉ điều chỉnh sau khi có root cause, reconciliation và approval. 2. Một báo cáo customer balance tăng gấp ba sau khi thêm JOIN customer_contact. Vì sao? # Đáp án: Customer-contact có thể 1:N, làm account/customer rows fan-out. Aggregate contact hoặc chọn một record hiệu lực trước khi JOIN; xác nhận grain từng CTE. 3. ETL count khớp nhưng amount lệch. Những khả năng nào? # Đáp án: Numeric conversion/rounding, duplicate có amount đối nghịch, reject/NULL, FX rate, sign DR/CR, filter status, late update, cùng count nhưng record khác. 4. EOD job accrual chạy lại và amount gấp đôi. Thiết kế sửa căn cơ? # Đáp án: Unique key theo business_date + account + accrual_type; MERGE hoặc replace có kiểm soát; run ledger/checkpoint; reconciliation trước posting; tách detail và posting status. 5. Tài khoản có ledger balance 100 triệu nhưng chỉ rút được 20 triệu. Có phải lỗi? # Đáp án: Chưa chắc. Kiểm tra hold/restricted amount và PABL/available balance. Công thức nguồn cho thấy ledger gồm available + restricted. 6. Đổi số tài khoản đẹp có phải update toàn bộ gdc_trx_his ? # Đáp án: Không nếu thiết kế đúng. History nối bằng DEP_ACNO surrogate; chỉ thay/mapping LCL_ACNO và audit. 7. Một khoản vay có balance nhưng không có overdue record dù quá due date. # Đáp án: Kiểm tra schedule item, payment allocation, holiday/business date, account status và job tạo gle_schdpst_his . Balance không đủ để kết luận overdue. 8. Một collateral đang bảo đảm hai khoản vay. Là lỗi hay hợp lệ? # Đáp án: Có thể hợp lệ nếu module hỗ trợ allocation. Phải kiểm tra eligible value, allocation ratio, priority và tổng allocated không vượt hạn mức. 9. SWIFT outbound timeout. Operator nhấn gửi lại ngay có an toàn không? # Đáp án: Không. Kiểm tra unique reference, Alliance/message status và correspondent acknowledgment. Timeout có thể xảy ra sau khi message đã được gửi. 10. Safe Watch backlog tăng mạnh sau khi update list. Ưu tiên xử lý gì? # Đáp án: Đánh giá rule/matching threshold, transliteration, list version, false-positive distribution; không bypass screening. Phân luồng case theo risk và SLA. 11. Nostro reconciliation có hai dòng cùng amount/date. Match thế nào? # Đáp án: Dùng thêm currency, direction, reference, counterparty, sequence/value timestamp; giữ confidence score và manual review nếu ambiguous. 12. ATM timeout nhưng Core đã debit. Luồng nào cần kiểm tra? # Đáp án: Trace no/idempotency key → Core commit → switch/network response → reversal advice/timeout rule → settlement. Không debit lần hai khi retry. 13. MIS không thấy giao dịch vừa phát sinh 10 phút trước. Có phải ETL lỗi? # Đáp án: Không nhất thiết. Tài liệu mô tả MIS T+1/previous day. Dùng OLTP/channel log cho realtime. 14. JOIN SCD customer chỉ bằng customer_no gây lỗi gì? # Đáp án: Một fact match nhiều version dimension, fan-out và gán sai branch/manager lịch sử. Cần effective-date join. 15. PMS profit cao bất thường nhưng revenue khớp GL. Nghi ngờ gì? # Đáp án: ABC/Credit Cost job chưa hoàn tất, dependency sai, driver bằng 0, hoặc adjustment chưa apply. Kiểm tra job chain trước revenue. 16. Tổng profit customer không bằng GL P&L. Những nhóm nguyên nhân? # Đáp án: Unmapped COA, orphan customer/account, incomplete dependency, rounding, adjustment, excluded product, duplicate allocation/profit sharing. 17. Cost driver denominator bằng 0 xử lý thế nào? # Đáp án: Không chia. Đưa chi phí vào unallocated bucket hoặc rule fallback có phê duyệt và audit. 18. EAD giảm mạnh sau khi release mới. Điều tra gì? # Đáp án: Off-balance feed, CCF, population filter, collateral netting, group/customer mapping, model version, base date và FX rate. 19. RWA tăng nhưng EAD không đổi. Có thể do đâu? # Đáp án: Risk weight/model/rating/collateral eligibility thay đổi, currency/sovereign mapping, maturity bucket hoặc regulatory rule version. 20. L4 báo healthy nhưng khách không giao dịch được. Vì sao? # Đáp án: Health check có thể chỉ kiểm port. AP/Tmax hết thread/pool, DB service unavailable hoặc business dependency fail. Cần deep health check. 21. Connection pool 100%, DB CPU thấp. Điều này loại trừ DB không? # Đáp án: Không. Có thể sessions chờ lock/network/commit/I/O hoặc leak, nên CPU thấp nhưng response chậm. Kiểm tra waits và blockers. 22. RAC node bị eviction. Điều tra ưu tiên? # Đáp án: Clusterware logs, interconnect latency/loss, storage heartbeat, CPU starvation, time sync và network changes. Không chỉ nhìn alert log database. 23. Source và target amount khớp nhưng report sai theo branch. Vì sao? # Đáp án: Tổng toàn hàng che giấu sai phân bổ dimension. Reconcile theo nhiều cấp: total → currency → product → branch → account sample. 24. Một hot account nhận hàng nghìn giao dịch/giây gây row lock. Giải pháp kiến trúc? # Đáp án: Giảm update hotspot: ledger/event append, sharded counters/buckets, queue/serialization hợp lý, optimistic design, batch aggregation; phải giữ consistency và account balance semantics."}, {"tab": "recall", "id": "recall-c-bai-tap-ve-lai-tu-tri-nho", "title": "C. Bài tập vẽ lại từ trí nhớ", "text": "C. Bài tập vẽ lại từ trí nhớ # Vẽ Channel → Core → Slip → Voucher → GL. Vẽ cây Loan: Line → Account → Execution → Schedule. Vẽ Deposit: DEP_ACNO → Master/Sub-master → Transaction/Interest History. Vẽ EOD: Account detail → Accrual/FTP → Group by COA → Netting → GL/PMS. Vẽ DW 5 tầng và ghi rõ T+1. Vẽ PMS: GL → Mapping → FTP/ABC/Credit Cost → PA Customer → Branch/Product. Vẽ Risk: Exposure → Collateral → EAD → PD/LGD → EL/RWA/ALM."}, {"tab": "tables", "id": "tables-chi-muc-ten-bang-oi-tuong-xuat-hien-trong-tai-lieu-nguon", "title": "Chỉ mục tên bảng/đối tượng xuất hiện trong tài liệu nguồn", "text": "Chỉ mục tên bảng/đối tượng xuất hiện trong tài liệu nguồn # Danh sách tự động trích xuất để hỗ trợ tìm kiếm; một số token có thể là prefix hoặc tên minh họa, cần đối chiếu Data Dictionary. Tên Số lần xuất hiện bpms_abc_cus_cost 1 bpms_abc_drv_ 3 bpms_pl_cus_mas 1 bpms_pl_pa_cus_mas 5 bpms_pl_prdn_plan 1 cmn_rprtcd_map 1 cmn_trns_his 1 gac_accdet_his 3 gac_bspllc_mas 6 gac_ftpdet_his 2 gac_slip_mas 1 gat_obktrx_log 2 gat_trx_log 2 gdc_ac_mas 9 gdc_int_mas 3 gdc_intcal_his 3 gdc_maschgdt_his 4 gdc_rlytrx_his 1 gdc_slip_his 1 gdc_tacrchg_his 1 gdc_trx_his 8 gdd_lq_mas 2 gdd_lqinchg_his 1 gdd_lqln_mas 1 gdt_dft 1 gdt_his 1 gdt_inf 1 gdw_com_ 1 gdw_com_acct_inf 1 gdw_com_acpl_d 2 gdw_com_bsplic_inf 2 gdw_com_cus_inf 2 gdw_com_cusdep_d 4 gdw_crm_ 1 gdw_cus_inf 1 gdw_gac_acccdedic_mas 2 gdw_gac_accdet_his 4 gdw_gac_bspllc_mas 4 gdw_gac_slip_his 2 gdw_gac_vouic_his 2 gdw_rsk_ 2 gdw_rsk_alm_est_mas 1 gdw_rsk_csum_mas 1 gdw_rsk_cus_inf 1 gdw_rsk_dmb_gods_dmb 1 gdw_rsk_ead_mas 2 gdw_rsk_ead_sum_mas 5 gdw_rsk_ibs_dmb_link 4 gdw_rsk_tot_coa_inf 1 gif_billpmnt_trx_log 1 gif_cfm_ 1 gla_aprs_mas 4 gla_coltr_inf 1 gla_dep_mas 2 gla_estbllon_inf 4 gla_estt_mas 4 gla_psas_mas 1 gle_acct_mas 1 gle_dsbs 1 gle_dsbs_mas 5 gle_dsbstrx_his 1 gle_lmt 1 gle_lmt_mas 2 gle_schd_mas 7 gle_schdpst_his 7 glm_aplct_mas 1 glm_aprv_mas 2 glm_cnsl_mas 1 glm_colestb_inf 1 glm_cucl_inf 1 gmm_pst_inf 1 gms_dispch_tgt 2 gms_dspch_mas 3 gms_umscust_mas 2 grc_actl 6 grc_shdw 6 gre_amd 1 gre_mas 1 gre_outgoing_ 1 gre_outgoing_mas 2 gre_stmt_inf 1 grf_locacd_com 1 gsc_pst_inf 2 gsm_incoming_mas 2 gso_autotrms_mas 1 gso_autotrns_mas 1 gso_batfile_mas 1 gso_dayftrns_mas 1 gtd_is_mas 1 gtd_td_mas 7 pms_abc_ 1 pms_abc_cost 1 pms_abc_drv_ 1 pms_abc_drv_acno 1 pms_abc_drv_sb 1 pms_adj_ 2 pms_adj_trns 4 pms_coa_code 1 pms_pl_corp_mas 1 pms_pl_crop_ 1 pms_pl_cus_abc 1 pms_pl_cus_mas 2 pms_pl_evalt_mas 2 pms_pl_evalt_ser_mon 2 pms_pl_pa_ 2 pms_pl_pa_cus_mas 3 pms_prdn_ 1 pms_valuation_mapping 1 risk_exposure 2"}];
+const tabButtons=[...document.querySelectorAll('.tab-btn')];
+const panels=[...document.querySelectorAll('.tab-panel')];
+const tocs=[...document.querySelectorAll('.toc')];
+function activateTab(name, updateHash=false){tabButtons.forEach(b=>b.classList.toggle('active',b.dataset.tab===name));panels.forEach(p=>p.classList.toggle('active',p.dataset.panel===name));tocs.forEach(t=>t.classList.toggle('active',t.dataset.toc===name));localStorage.setItem('rom-tab',name);if(updateHash) history.replaceState(null,'','#'+name);}
+tabButtons.forEach(b=>b.addEventListener('click',()=>activateTab(b.dataset.tab,true)));
+document.addEventListener('click',e=>{const a=e.target.closest('a[data-target]');if(a) setTimeout(()=>document.getElementById(a.dataset.target)?.scrollIntoView({behavior:'smooth'}),0);});
+const initial=(location.hash||'').slice(1);activateTab(['rom','recall','tables','diagrams','about'].includes(initial)?initial:(localStorage.getItem('rom-tab')||'rom'));
+const themeBtn=document.getElementById('themeBtn');const savedTheme=localStorage.getItem('rom-theme');if(savedTheme)document.documentElement.dataset.theme=savedTheme;else if(matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.dataset.theme='dark';themeBtn.onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('rom-theme',n)};
+const search=document.getElementById('search'), results=document.getElementById('searchResults');
+function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
+search.addEventListener('input',()=>{const q=norm(search.value.trim());if(q.length<2){results.classList.remove('show');results.innerHTML='';return}const terms=q.split(/\s+/);const rows=INDEX.map(x=>{const hay=norm(x.title+' '+x.text);const score=terms.reduce((s,t)=>s+(hay.includes(t)?1:0)+(norm(x.title).includes(t)?2:0),0);return [score,x]}).filter(x=>x[0]>=terms.length).sort((a,b)=>b[0]-a[0]).slice(0,18);results.innerHTML=rows.length?rows.map(([s,x])=>`<a class="search-result" href="#${x.id}" data-result-tab="${x.tab}"><strong>${x.title}</strong><small>${x.text.slice(0,150)}…</small></a>`).join(''):'<div class="search-result">Không tìm thấy kết quả.</div>';results.classList.add('show')});
+results.addEventListener('click',e=>{const a=e.target.closest('[data-result-tab]');if(!a)return;activateTab(a.dataset.resultTab);results.classList.remove('show');search.blur();setTimeout(()=>document.getElementById(a.hash.slice(1))?.scrollIntoView({behavior:'smooth'}),50)});document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('show')});
+document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.className='copy-code';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(pre.innerText.replace(/^Copy/,'').trim());b.textContent='Đã copy';setTimeout(()=>b.textContent='Copy',1200)};pre.appendChild(b)});
+let deferredPrompt;const installBtn=document.getElementById('installBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;installBtn.hidden=false});installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.hidden=true};
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+</script>
+</body></html>
