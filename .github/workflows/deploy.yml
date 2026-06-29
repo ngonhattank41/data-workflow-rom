@@ -3,7 +3,7 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches:
-      - master
+      - main
       - main
 
 jobs:
@@ -24,5 +24,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: data-workflow-rom
           directory: .
-          branch: master
+          branch: main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
