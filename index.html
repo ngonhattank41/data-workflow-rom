@@ -26,6 +26,14 @@ main{min-width:0}.tab-panel{display:none}.tab-panel.active{display:block}.hero{p
 mark{background:#fde68a;color:#111827;border-radius:3px;padding:0 2px}
 @media(max-width:900px){.layout{display:block;padding:14px 10px 65px}.sidebar{display:none}.tabs{top:57px;padding-left:10px}.chapter{padding:18px 16px;border-radius:13px}.diagram-grid{grid-template-columns:1fr}.brand span:last-child{display:none}.topbar{gap:8px}}
 @media print{.topbar,.tabs,.sidebar,.copy-code{display:none!important}.layout{display:block;max-width:none;padding:0}.chapter{box-shadow:none;break-inside:avoid;border-color:#bbb}.tab-panel{display:block!important}}
+
+.diagram-launcher{border:2px solid color-mix(in srgb,var(--accent) 40%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,var(--surface)),var(--surface))}
+.diagram-launcher-head{display:flex;align-items:center;justify-content:space-between;gap:18px}.diagram-launcher-head h2{margin:.15rem 0 .35rem}.diagram-launcher-head p{margin:0;color:var(--muted)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--accent)}.open-diagrams-btn{border:0;border-radius:12px;background:var(--accent);color:#fff;padding:12px 16px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow)}
+.diagram-thumb-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.diagram-thumb-strip button{display:flex;flex-direction:column;gap:7px;padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);cursor:pointer;text-align:left}.diagram-thumb-strip button:hover{border-color:var(--accent);transform:translateY(-1px)}.diagram-thumb-strip img{width:100%;height:96px;object-fit:contain;background:#fff;border-radius:8px}.diagram-thumb-strip span{font-size:13px;font-weight:700}
+#diagram-gallery>h1::after{content:"8/8";display:inline-block;margin-left:10px;padding:4px 9px;border-radius:999px;background:var(--accent);color:#fff;font-size:13px;vertical-align:middle}.gallery-item{position:relative}.gallery-item::before{content:"SƠ ĐỒ";position:absolute;top:18px;left:18px;z-index:2;padding:3px 7px;border-radius:999px;background:rgba(15,23,42,.78);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em}.gallery-item img{min-height:190px}
+@media(max-width:780px){.diagram-launcher-head{align-items:flex-start;flex-direction:column}.open-diagrams-btn{width:100%}.diagram-thumb-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.diagram-thumb-strip img{height:78px}}
+
 </style>
 </head>
 <body>
@@ -48,13 +56,31 @@ mark{background:#fde68a;color:#111827;border-radius:3px;padding:0 2px}
   <div class="toc active" data-toc="rom"><a href="#rom-1-ban-o-toan-canh-trong-60-giay" data-target="rom-1-ban-o-toan-canh-trong-60-giay">1. Bản đồ toàn cảnh trong 60 giây</a><a href="#rom-2-thong-ke-va-lam-sach-tai-lieu-nguon" data-target="rom-2-thong-ke-va-lam-sach-tai-lieu-nguon">2. Thống kê và làm sạch tài liệu nguồn</a><a href="#rom-3-chin-nguyen-ly-xuyen-suot-phai-thuoc-long" data-target="rom-3-chin-nguyen-ly-xuyen-suot-phai-thuoc-long">3. Chín nguyên lý xuyên suốt phải thuộc lòng</a><a href="#rom-4-customer-kyc-aml" data-target="rom-4-customer-kyc-aml">4. Customer/KYC/AML</a><a href="#rom-5-vong-oi-mot-giao-dich-core" data-target="rom-5-vong-oi-mot-giao-dich-core">5. Vòng đời một giao dịch Core</a><a href="#rom-6-eod-accrual-ftp-netting" data-target="rom-6-eod-accrual-ftp-netting">6. EOD: Accrual, FTP, Netting</a><a href="#rom-7-deposit-business-data-model" data-target="rom-7-deposit-business-data-model">7. Deposit Business &amp; Data Model</a><a href="#rom-8-loan-lifecycle" data-target="rom-8-loan-lifecycle">8. Loan lifecycle</a><a href="#rom-9-collateral-architecture" data-target="rom-9-collateral-architecture">9. Collateral architecture</a><a href="#rom-10-fx-remittance" data-target="rom-10-fx-remittance">10. FX &amp; Remittance</a><a href="#rom-11-trade-finance" data-target="rom-11-trade-finance">11. Trade Finance</a><a href="#rom-12-treasury" data-target="rom-12-treasury">12. Treasury</a><a href="#rom-13-nostro-vostro-reconciliation" data-target="rom-13-nostro-vostro-reconciliation">13. Nostro/Vostro Reconciliation</a><a href="#rom-14-channel-architecture" data-target="rom-14-channel-architecture">14. Channel Architecture</a><a href="#rom-15-kien-truc-nhieu-tang" data-target="rom-15-kien-truc-nhieu-tang">15. Kiến trúc nhiều tầng</a><a href="#rom-16-cong-thuc-loi-nhuan-quan-tri" data-target="rom-16-cong-thuc-loi-nhuan-quan-tri">16. Công thức lợi nhuận quản trị</a><a href="#rom-17-risk-basics" data-target="rom-17-risk-basics">17. Risk Basics</a><a href="#rom-18-core-banking-infrastructure" data-target="rom-18-core-banking-infrastructure">18. Core Banking Infrastructure</a><a href="#rom-19-ma-tran-trieu-chung-uong-kiem-tra" data-target="rom-19-ma-tran-trieu-chung-uong-kiem-tra">19. Ma trận triệu chứng → đường kiểm tra</a><a href="#rom-20-bo-cau-hoi-phai-hoi-truoc-khi-sua-du-lieu" data-target="rom-20-bo-cau-hoi-phai-hoi-truoc-khi-sua-du-lieu">20. Bộ câu hỏi phải hỏi trước khi sửa dữ liệu</a><a href="#rom-21-kiem-tra-duplicate-theo-natural-key" data-target="rom-21-kiem-tra-duplicate-theo-natural-key">21. Kiểm tra duplicate theo natural key</a><a href="#rom-22-merge-idempotent" data-target="rom-22-merge-idempotent">22. MERGE idempotent</a><a href="#rom-23-pre-aggregate-truoc-join" data-target="rom-23-pre-aggregate-truoc-join">23. Pre-aggregate trước JOIN</a><a href="#rom-24-detect-orphan-record" data-target="rom-24-detect-orphan-record">24. Detect orphan record</a><a href="#rom-25-reconciliation-source-target" data-target="rom-25-reconciliation-source-target">25. Reconciliation source/target</a><a href="#rom-26-thu-tu-hoc-toi-uu" data-target="rom-26-thu-tu-hoc-toi-uu">26. Thứ tự học tối ưu</a><a href="#rom-27-phuong-phap-5-phut" data-target="rom-27-phuong-phap-5-phut">27. Phương pháp 5 phút</a><a href="#rom-28-moc-tri-nho" data-target="rom-28-moc-tri-nho">28. Móc trí nhớ</a><a href="#rom-29-ranh-gioi-giua-du-kien-va-suy-luan" data-target="rom-29-ranh-gioi-giua-du-kien-va-suy-luan">29. Ranh giới giữa dữ kiện và suy luận</a></div>
   <div class="toc" data-toc="recall"><a href="#recall-a-66-flashcards" data-target="recall-a-66-flashcards">A. 66 Flashcards</a><a href="#recall-b-24-cau-hoi-hoc-bua-co-ap-an" data-target="recall-b-24-cau-hoi-hoc-bua-co-ap-an">B. 24 câu hỏi hóc búa có đáp án</a><a href="#recall-c-bai-tap-ve-lai-tu-tri-nho" data-target="recall-c-bai-tap-ve-lai-tu-tri-nho">C. Bài tập vẽ lại từ trí nhớ</a></div>
   <div class="toc" data-toc="tables"></div>
-  <div class="toc" data-toc="diagrams"><a href="#diagram-gallery">Thư viện 8 sơ đồ</a></div>
+  <div class="toc" data-toc="diagrams"><a href="#diagram-gallery">8 sơ đồ tư duy</a></div>
   <div class="toc" data-toc="about"><a href="#about-content">Cách sử dụng</a></div>
 </aside>
 <main>
 <section class="tab-panel active" data-panel="rom">
-  <div class="hero"><h1>Data Workflow ROM</h1><p>Sổ tay tra cứu nhanh luồng dữ liệu ngân hàng dành cho Oracle Database Developer: từ Channel, Core, Accounting/EOD đến Data Warehouse, PMS, Risk và Infrastructure.</p><div class="chips"><span class="chip">11 miền kiến thức</span><span class="chip">8 sơ đồ</span><span class="chip">66 flashcard</span><span class="chip">PWA & offline</span></div></div>
+  <div class="hero"><h1>Data Workflow ROM</h1><p>Sổ tay tra cứu nhanh luồng dữ liệu ngân hàng dành cho Oracle Database Developer: từ Channel, Core, Accounting/EOD đến Data Warehouse, PMS, Risk và Infrastructure.</p><div class="chips"><span class="chip">11 miền kiến thức</span><span class="chip">8 sơ đồ tư duy</span><span class="chip">66 flashcard</span><span class="chip">PWA & offline</span></div></div>
   <div class="notice"><strong>Lưu ý bảo mật:</strong> Không xuất bản công khai nếu tài liệu chứa tên hệ thống, bảng dữ liệu hoặc quy trình nội bộ của ngân hàng. Nên đặt lớp đăng nhập bằng email/SSO.</div>
+  <section class="chapter diagram-launcher" id="rom-8-so-do-tu-duy">
+    <div class="diagram-launcher-head">
+      <div><span class="eyebrow">BẢN ĐỒ HỌC NHANH</span><h2>8 sơ đồ tư duy đã được nhúng đầy đủ</h2>
+      <p>Nhấn vào nút bên dưới để mở thư viện. Mỗi sơ đồ có thể phóng to và tải riêng.</p></div>
+      <button class="open-diagrams-btn" type="button" data-open-tab="diagrams">Mở 8 sơ đồ tư duy →</button>
+    </div>
+    <div class="diagram-thumb-strip" aria-label="Xem trước 8 sơ đồ tư duy">
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/01_end_to_end_data_workflow.png" alt="1. Luồng dữ liệu ngân hàng end-to-end"><span>1. End-to-end</span></button>
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/02_aml_kyc_flow.png" alt="2. Luồng KYC và AML"><span>2. KYC/AML</span></button>
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/03_core_transaction_accounting.png" alt="3. Core transaction đến accounting"><span>3. Core → GL</span></button>
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/04_eod_accrual_ftp.png" alt="4. EOD Accrual và FTP"><span>4. EOD/FTP</span></button>
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/05_loan_key_chain.png" alt="5. Chuỗi khóa dữ liệu Loan"><span>5. Loan keys</span></button>
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/06_reconciliation_flow.png" alt="6. Luồng reconciliation"><span>6. Reconcile</span></button>
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/07_dw_layering.png" alt="7. Các tầng Data Warehouse"><span>7. DW layers</span></button>
+      <button type="button" data-open-tab="diagrams"><img src="assets/diagrams/08_infrastructure_rac.png" alt="8. Kiến trúc Application, RAC và DR"><span>8. RAC/DR</span></button>
+    </div>
+  </section>
+
   <section class="chapter prelude"><h1 id="rom-data-workflow-rom-kien-thuc-ngan-hang">DATA WORKFLOW — ROM KIẾN THỨC NGÂN HÀNG<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-data-workflow-rom-kien-thuc-ngan-hang">#</a></h1>
 <blockquote>
 <p><strong>Mục tiêu:</strong> giúp một Oracle Database Developer hiểu nhanh, truy vết đúng và vận hành an toàn luồng dữ liệu ngân hàng từ Channel → Core → Accounting/EOD → Data Warehouse → PMS/Risk/Reporting.</p>
@@ -73,7 +99,7 @@ mark{background:#fde68a;color:#111827;border-radius:3px;padding:0 2px}
 <li><strong>Quản trị:</strong> PMS/Profitability, Risk/Basel/ALM, báo cáo quản trị và pháp lý.</li>
 </ol>
 <h3 id="rom-luong-nho-duy-nhat">Luồng nhớ duy nhất<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-nho-duy-nhat">#</a></h3>
-<p><img alt="Luồng dữ liệu ngân hàng end-to-end" src="diagrams_fixed/01_end_to_end_data_workflow.png"/></p>
+<p><img alt="Luồng dữ liệu ngân hàng end-to-end" src="assets/diagrams/01_end_to_end_data_workflow.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/01_end_to_end_data_workflow.png" rel="noopener" target="_blank"><img alt="Luồng dữ liệu ngân hàng end-to-end" loading="lazy" src="assets/diagrams/01_end_to_end_data_workflow.png"/></a><figcaption>Luồng dữ liệu ngân hàng end-to-end — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -234,7 +260,7 @@ mark{background:#fde68a;color:#111827;border-radius:3px;padding:0 2px}
 <h3 id="rom-muc-ich">Mục đích<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-muc-ich">#</a></h3>
 <p>Xác định đúng khách hàng, đo rủi ro, ngăn giao dịch bị cấm và tạo dữ liệu phục vụ CTR/STR.</p>
 <h3 id="rom-luong-nghiep-vu-nen">Luồng nghiệp vụ nén<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-nghiep-vu-nen">#</a></h3>
-<p><img alt="Luồng KYC, AML và báo cáo tuân thủ" src="diagrams_fixed/02_aml_kyc_flow.png"/></p>
+<p><img alt="Luồng KYC, AML và báo cáo tuân thủ" src="assets/diagrams/02_aml_kyc_flow.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/02_aml_kyc_flow.png" rel="noopener" target="_blank"><img alt="Luồng KYC và AML" loading="lazy" src="assets/diagrams/02_aml_kyc_flow.png"/></a><figcaption>Luồng KYC và AML — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -272,7 +298,7 @@ mark{background:#fde68a;color:#111827;border-radius:3px;padding:0 2px}
 <h1 id="rom-phan-b-core-transaction-accounting-eod">PHẦN B — CORE TRANSACTION, ACCOUNTING &amp; EOD<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-b-core-transaction-accounting-eod">#</a></h1>
 </section><section class="chapter"><h2 id="rom-5-vong-oi-mot-giao-dich-core">5. Vòng đời một giao dịch Core<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-5-vong-oi-mot-giao-dich-core">#</a></h2>
 <h3 id="rom-luong-chuan">Luồng chuẩn<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-chuan">#</a></h3>
-<p><img alt="Từ giao dịch Core đến sổ cái" src="diagrams_fixed/03_core_transaction_accounting.png"/></p>
+<p><img alt="Từ giao dịch Core đến sổ cái" src="assets/diagrams/03_core_transaction_accounting.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/03_core_transaction_accounting.png" rel="noopener" target="_blank"><img alt="Core transaction đến accounting" loading="lazy" src="assets/diagrams/03_core_transaction_accounting.png"/></a><figcaption>Core transaction đến accounting — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -308,7 +334,7 @@ mark{background:#fde68a;color:#111827;border-radius:3px;padding:0 2px}
 <p>Không sửa GL trực tiếp trước khi xác định đúng điểm gãy.</p>
 </section><section class="chapter"><h2 id="rom-6-eod-accrual-ftp-netting">6. EOD: Accrual, FTP, Netting<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-6-eod-accrual-ftp-netting">#</a></h2>
 <h3 id="rom-luong-nen">Luồng nén<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-nen">#</a></h3>
-<p><img alt="Luồng EOD: Accrual, FTP và Netting" src="diagrams_fixed/04_eod_accrual_ftp.png"/></p>
+<p><img alt="Luồng EOD: Accrual, FTP và Netting" src="assets/diagrams/04_eod_accrual_ftp.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/04_eod_accrual_ftp.png" rel="noopener" target="_blank"><img alt="EOD Accrual và FTP" loading="lazy" src="assets/diagrams/04_eod_accrual_ftp.png"/></a><figcaption>EOD Accrual và FTP — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -399,7 +425,7 @@ having abs(sum(nvl(dr_amount, 0)) - sum(nvl(cr_amount, 0))) &gt; :p_tolerance;
 <h1 id="rom-phan-d-loan-collateral">PHẦN D — LOAN &amp; COLLATERAL<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-d-loan-collateral">#</a></h1>
 </section><section class="chapter"><h2 id="rom-8-loan-lifecycle">8. Loan lifecycle<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-8-loan-lifecycle">#</a></h2>
 <h3 id="rom-cay-tin-dung-ba-cap">Cây tín dụng ba cấp<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-cay-tin-dung-ba-cap">#</a></h3>
-<p><img alt="Chuỗi khóa nghiệp vụ khoản vay" src="diagrams_fixed/05_loan_key_chain.png"/></p>
+<p><img alt="Chuỗi khóa nghiệp vụ khoản vay" src="assets/diagrams/05_loan_key_chain.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/05_loan_key_chain.png" rel="noopener" target="_blank"><img alt="Chuỗi khóa dữ liệu Loan" loading="lazy" src="assets/diagrams/05_loan_key_chain.png"/></a><figcaption>Chuỗi khóa dữ liệu Loan — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -528,7 +554,7 @@ having abs(sum(nvl(dr_amount, 0)) - sum(nvl(cr_amount, 0))) &gt; :p_tolerance;
 <li><strong>Actual:</strong> sao kê/thông tin thực tế từ ngân hàng đại lý.</li>
 </ul>
 <h3 id="rom-luong-matching">Luồng matching<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-luong-matching">#</a></h3>
-<p><img alt="Luồng đối soát và xử lý chênh lệch" src="diagrams_fixed/06_reconciliation_flow.png"/></p>
+<p><img alt="Luồng đối soát và xử lý chênh lệch" src="assets/diagrams/06_reconciliation_flow.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/06_reconciliation_flow.png" rel="noopener" target="_blank"><img alt="Luồng reconciliation" loading="lazy" src="assets/diagrams/06_reconciliation_flow.png"/></a><figcaption>Luồng reconciliation — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -581,7 +607,7 @@ having abs(sum(nvl(dr_amount, 0)) - sum(nvl(cr_amount, 0))) &gt; :p_tolerance;
 <hr/>
 <h1 id="rom-phan-h-mis-data-warehouse">PHẦN H — MIS / DATA WAREHOUSE<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-h-mis-data-warehouse">#</a></h1>
 </section><section class="chapter"><h2 id="rom-15-kien-truc-nhieu-tang">15. Kiến trúc nhiều tầng<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-15-kien-truc-nhieu-tang">#</a></h2>
-<p><img alt="Các lớp dữ liệu từ nguồn đến báo cáo" src="diagrams_fixed/07_dw_layering.png"/></p>
+<p><img alt="Các lớp dữ liệu từ nguồn đến báo cáo" src="assets/diagrams/07_dw_layering.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/07_dw_layering.png" rel="noopener" target="_blank"><img alt="Các tầng Data Warehouse" loading="lazy" src="assets/diagrams/07_dw_layering.png"/></a><figcaption>Các tầng Data Warehouse — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -749,7 +775,7 @@ left join (
 <h1 id="rom-phan-k-infrastructure">PHẦN K — INFRASTRUCTURE<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-phan-k-infrastructure">#</a></h1>
 </section><section class="chapter"><h2 id="rom-18-core-banking-infrastructure">18. Core Banking Infrastructure<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-18-core-banking-infrastructure">#</a></h2>
 <h3 id="rom-mo-hinh">Mô hình<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#rom-mo-hinh">#</a></h3>
-<p><img alt="Hạ tầng ứng dụng, RAC và DR" src="diagrams_fixed/08_infrastructure_rac.png"/></p>
+<p><img alt="Hạ tầng ứng dụng, RAC và DR" src="assets/diagrams/08_infrastructure_rac.png"/></p>
 <details><summary>Mermaid source (tùy chọn)</summary>
 <figure class="diagram-card"><a href="assets/diagrams/08_infrastructure_rac.png" rel="noopener" target="_blank"><img alt="Kiến trúc Application, RAC và DR" loading="lazy" src="assets/diagrams/08_infrastructure_rac.png"/></a><figcaption>Kiến trúc Application, RAC và DR — chạm để mở kích thước đầy đủ</figcaption></figure>
 </details>
@@ -1661,7 +1687,8 @@ from src cross join tgt;
 </tbody>
 </table>
 </section></section>
-<section class="tab-panel" data-panel="diagrams"><section class="chapter" id="diagram-gallery"><h1>Thư viện Diagram</h1><p>Chạm vào từng sơ đồ để mở ảnh đầy đủ.</p><div class="diagram-grid"><figure class="diagram-card gallery-item"><a href="assets/diagrams/01_end_to_end_data_workflow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/01_end_to_end_data_workflow.png" alt="Luồng dữ liệu ngân hàng end-to-end"></a><figcaption>1. Luồng dữ liệu ngân hàng end-to-end</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/02_aml_kyc_flow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/02_aml_kyc_flow.png" alt="Luồng KYC và AML"></a><figcaption>2. Luồng KYC và AML</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/03_core_transaction_accounting.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/03_core_transaction_accounting.png" alt="Core transaction đến accounting"></a><figcaption>3. Core transaction đến accounting</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/04_eod_accrual_ftp.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/04_eod_accrual_ftp.png" alt="EOD Accrual và FTP"></a><figcaption>4. EOD Accrual và FTP</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/05_loan_key_chain.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/05_loan_key_chain.png" alt="Chuỗi khóa dữ liệu Loan"></a><figcaption>5. Chuỗi khóa dữ liệu Loan</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/06_reconciliation_flow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/06_reconciliation_flow.png" alt="Luồng reconciliation"></a><figcaption>6. Luồng reconciliation</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/07_dw_layering.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/07_dw_layering.png" alt="Các tầng Data Warehouse"></a><figcaption>7. Các tầng Data Warehouse</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/08_infrastructure_rac.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/08_infrastructure_rac.png" alt="Kiến trúc Application, RAC và DR"></a><figcaption>8. Kiến trúc Application, RAC và DR</figcaption></figure></div></section></section>
+<section class="tab-panel" data-panel="diagrams"><section class="chapter" id="diagram-gallery"><h1>8 Sơ đồ tư duy Data Workflow</h1>
+<p><strong>Đã kiểm tra đủ 8/8 sơ đồ.</strong> Chạm vào từng ảnh để mở kích thước đầy đủ. Nếu thiết bị chặn ảnh riêng lẻ, dùng <a href="assets/Data_Workflow_Diagram_Gallery_Fixed.png" target="_blank" rel="noopener">ảnh tổng hợp dự phòng</a>.</p><div class="diagram-grid"><figure class="diagram-card gallery-item"><a href="assets/diagrams/01_end_to_end_data_workflow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/01_end_to_end_data_workflow.png" alt="Luồng dữ liệu ngân hàng end-to-end"></a><figcaption>1. Luồng dữ liệu ngân hàng end-to-end</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/02_aml_kyc_flow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/02_aml_kyc_flow.png" alt="Luồng KYC và AML"></a><figcaption>2. Luồng KYC và AML</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/03_core_transaction_accounting.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/03_core_transaction_accounting.png" alt="Core transaction đến accounting"></a><figcaption>3. Core transaction đến accounting</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/04_eod_accrual_ftp.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/04_eod_accrual_ftp.png" alt="EOD Accrual và FTP"></a><figcaption>4. EOD Accrual và FTP</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/05_loan_key_chain.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/05_loan_key_chain.png" alt="Chuỗi khóa dữ liệu Loan"></a><figcaption>5. Chuỗi khóa dữ liệu Loan</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/06_reconciliation_flow.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/06_reconciliation_flow.png" alt="Luồng reconciliation"></a><figcaption>6. Luồng reconciliation</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/07_dw_layering.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/07_dw_layering.png" alt="Các tầng Data Warehouse"></a><figcaption>7. Các tầng Data Warehouse</figcaption></figure><figure class="diagram-card gallery-item"><a href="assets/diagrams/08_infrastructure_rac.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/diagrams/08_infrastructure_rac.png" alt="Kiến trúc Application, RAC và DR"></a><figcaption>8. Kiến trúc Application, RAC và DR</figcaption></figure></div></section></section>
 <section class="tab-panel" data-panel="about"><section class="chapter" id="about-content"><h1>Cách sử dụng bộ ROM</h1><section class="chapter prelude"><h1 id="about-bo-rom-data-workflow">Bộ ROM Data Workflow<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#about-bo-rom-data-workflow">#</a></h1>
 <p>Tạo từ file nguồn <code>Data workflow.md</code> (41,627 từ, 2,618 dòng).</p>
 </section><section class="chapter"><h2 id="about-thanh-phan">Thành phần<a aria-label="Liên kết đến mục này" class="heading-anchor" href="#about-thanh-phan">#</a></h2>
@@ -1696,6 +1723,7 @@ const panels=[...document.querySelectorAll('.tab-panel')];
 const tocs=[...document.querySelectorAll('.toc')];
 function activateTab(name, updateHash=false){tabButtons.forEach(b=>b.classList.toggle('active',b.dataset.tab===name));panels.forEach(p=>p.classList.toggle('active',p.dataset.panel===name));tocs.forEach(t=>t.classList.toggle('active',t.dataset.toc===name));localStorage.setItem('rom-tab',name);if(updateHash) history.replaceState(null,'','#'+name);}
 tabButtons.forEach(b=>b.addEventListener('click',()=>activateTab(b.dataset.tab,true)));
+document.querySelectorAll('[data-open-tab]').forEach(el=>el.addEventListener('click',()=>{activateTab(el.dataset.openTab,true);window.scrollTo({top:0,behavior:'smooth'});}));
 document.addEventListener('click',e=>{const a=e.target.closest('a[data-target]');if(a) setTimeout(()=>document.getElementById(a.dataset.target)?.scrollIntoView({behavior:'smooth'}),0);});
 const initial=(location.hash||'').slice(1);activateTab(['rom','recall','tables','diagrams','about'].includes(initial)?initial:(localStorage.getItem('rom-tab')||'rom'));
 const themeBtn=document.getElementById('themeBtn');const savedTheme=localStorage.getItem('rom-theme');if(savedTheme)document.documentElement.dataset.theme=savedTheme;else if(matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.dataset.theme='dark';themeBtn.onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('rom-theme',n)};
@@ -1705,6 +1733,9 @@ search.addEventListener('input',()=>{const q=norm(search.value.trim());if(q.leng
 results.addEventListener('click',e=>{const a=e.target.closest('[data-result-tab]');if(!a)return;activateTab(a.dataset.resultTab);results.classList.remove('show');search.blur();setTimeout(()=>document.getElementById(a.hash.slice(1))?.scrollIntoView({behavior:'smooth'}),50)});document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('show')});
 document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.className='copy-code';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(pre.innerText.replace(/^Copy/,'').trim());b.textContent='Đã copy';setTimeout(()=>b.textContent='Copy',1200)};pre.appendChild(b)});
 let deferredPrompt;const installBtn=document.getElementById('installBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;installBtn.hidden=false});installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.hidden=true};
+
+document.querySelectorAll('img[src*="assets/diagrams/"]').forEach(img=>{img.addEventListener('error',()=>{img.alt='Không tải được sơ đồ — hãy dùng bản single-file hoặc ảnh tổng hợp.';img.style.minHeight='160px';img.style.padding='30px';img.style.border='2px dashed #dc2626';});});
+
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
 </script>
 </body></html>
